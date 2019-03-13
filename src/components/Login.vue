@@ -38,6 +38,7 @@ export default {
         account: '',
         password: ''
       },
+      loginStatus: '',
       rules2: {
         account: [
           { validator: validateAccount, trigger: 'blur' }
@@ -59,31 +60,16 @@ export default {
             }
           ).then((response) => {
             console.log(response)
-            if (response.data.status != '1' && response.data.status != '2') {
-              alert('用户名或密码错误')
+            if (response.data.status !== '1' && response.data.status !== '2') {
+              // alert('用户名或密码错误')
+              this.loginStatus = '用户名或密码错误'
+            } else {
+              this.loginStatus = ''
+              this.$router.push('/main')
             }
           }).catch((error) => {
             console.log(error)
           })
-          // this.axios.post(
-          //   'http://www.the15373.com/user/auth',
-          //   this.qs.stringify({'account':'11503070303','password':'123456789'}),
-          //   {
-          //     headers: {
-          //       'Content-Type': 'application/x-www-form-urlencoded'
-          //     }
-          //   }).then(function(res) {
-          //     console.log(res.data)
-          //           //控制台打印请求成功时返回的数据
-          //       //bind(this)可以不用
-          //   }.bind(this)).catch(function(err) {
-          //     if(err.response) {
-          //       console.log(err.response)
-          //         //控制台打印错误返回的内容
-          //     }
-          //       //bind(this)可以不用
-          // }.bind(this))
-          // this.$router.push('/main')
         } else {
           console.log('error submit!!')
           return false
@@ -108,5 +94,6 @@ export default {
   height:300px;
   width:450px;
   border:1px solid rgb(0, 0, 0);
+  text-align: center;
 }
 </style>
