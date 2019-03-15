@@ -7,6 +7,7 @@ import Upfile from '@/components/content/Upfile'
 import Uptable from '@/components/content/Uptable'
 import Notice from '@/components/content/Notice'
 import Mytable from '@/components/content/Mytable'
+import Test from '@/components/Test'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test
     },
     {
       path: '/login',

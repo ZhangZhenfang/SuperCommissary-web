@@ -74,7 +74,7 @@ export default {
         
         xhr = new XMLHttpRequest();  // XMLHttpRequest 对象
         xhr.open("post", url, true); //post方式，url为服务器请求地址，true 该参数规定请求是否异步处理。
-        xhr.onload = uploadComplete; //请求完成
+        xhr.onload = () => {console.log(xhr.responsseTest)} //请求完成
         xhr.onerror =  uploadFailed; //请求失败
         xhr.upload.onprogress = progressFunction;//【上传进度调用方法实现】
         xhr.upload.onloadstart = function(){//上传开始执行方法
