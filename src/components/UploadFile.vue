@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import SparkMD5 from 'spark-md5'
 export default {
   name: 'UploadFile',
   data () {
@@ -48,47 +47,6 @@ export default {
     },
     beforeRemove (file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`)
-    },
-    uploadfilefunction (file) {
-      let blobSlice = File.prototype.slice || File.prototype.mozSlice || File.prototype.webkitSlice
-      let fileReader = new FileReader()
-      let chunkSize = 2097152
-      let chunks = Math.ceil(file.size / chunkSize)
-      let currentChunk = 0
-      let spark = new SparkMD5()
-      fileReader.onload = function (e) {
-        spark.append(e.target.result)
-        currentChunk++
-        if (currentChunk < chunks) {
-          loadNext()
-        } else {
-          console.log('computed hash', spark.end())
-        }
-      }
-      fileReader.onerror = function () {
-        console.warn('FileReader error.')
-      }
-      function preUpload() {
-        var form = new FormData(); // FormData 对象
-        form.append("mf", fileObj); // 文件对象
-        
-        xhr = new XMLHttpRequest();  // XMLHttpRequest 对象
-        xhr.open("post", url, true); //post方式，url为服务器请求地址，true 该参数规定请求是否异步处理。
-        xhr.onload = () => {console.log(xhr.responsseTest)} //请求完成
-        xhr.onerror =  uploadFailed; //请求失败
-        xhr.upload.onprogress = progressFunction;//【上传进度调用方法实现】
-        xhr.upload.onloadstart = function(){//上传开始执行方法
-            ot = new Date().getTime();   //设置上传开始时间
-            oloaded = 0;//设置上传开始时，以上传的文件大小为0
-        };
-        xhr.send(form); //开始上传，发送form数据
-      }
-      function loadNext () {
-        let start = currentChunk * chunkSize
-        let end = ((start + chunkSize) >= file.size) ? file.size : start + chunkSize
-        fileReader.readAsArrayBuffer(blobSlice.call(file, start, end))
-      }
-      loadNext()
     }
   }
 }
@@ -102,4 +60,3 @@ export default {
   width: 80%;
 }
 </style>
-
