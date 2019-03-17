@@ -2,6 +2,9 @@
   <div>
     <input type="file" ref="file">
     <button @click='up'>bbbbbb</button>
+    <div id="uploadfile-process-div">
+      <el-progress :text-inside="true" :stroke-width="18" :percentage="percentage"></el-progress>
+    </div>
     {{ percentage }}
   </div>
 </template>
@@ -18,13 +21,27 @@ export default {
   methods: {
     up () {
       var data = {
-        fatherMD5: 'aa6197d394ed1bf888a15b466e693713',
-        splitNo: 0
+        userid: 1,
+        noticeid: 12
       }
-      this.upFile(this.$refs.file.files[0], data, 'http://localhost:8081/upload/upload', this.updateProgress, function () { console.log('success') }, function () { console.log('error') })
+      this.upFile(this.$refs.file.files[0], data, 'http://39.108.61.189:8081/upload', this.updateProgress, this.success, function () { console.log('error') })
     },
     updateProgress (progress) {
-      this.percentage = progress
+      this.percentage = 100 * progress
+    },
+    success (md5, data) {
+      this.axios.post('http://www.the15373.com/files/uploadFile', this.qs.stringify({
+        md5: md5,
+        noticeid: data.noticeid,
+        fileName: this.$refs.file.files[0].name })).then((res) => {
+        if (res.data.status === '1') {
+          console.log('success')
+          this.$message('上传成功')
+        } else {
+          this.$message('上传失败')
+          console.log('error')
+        }
+      })
     },
     upFile (file, data, url, updateProgress, success, error) {
       var totalLoaded = 0
@@ -38,9 +55,14 @@ export default {
       var split = Math.ceil(size / step)
       var splitNo = 0
       computeMD5(file, preUpload, splitFun)
-      // upSplit(this.$refs.file.files[0], data, 'http://localhost:8081/test/test', this.updateProgress, function () {console.log("success")}, function () {console.log("error")})
       function combine () {
-        that.axios.post('http://localhost:8081/upload/combine', that.qs.stringify({ md5: md5 })).then((res) => {})
+        that.axios.post(url + '/combine', that.qs.stringify({ md5: md5 })).then((res) => {
+          if (res.data.status === '1') {
+            success(md5, data)
+          } else {
+            error()
+          }
+        })
       }
       function splitFun (md5) {
         if (splitNo >= split) {
@@ -52,11 +74,10 @@ export default {
           fileslice = new File([fileslice], splitNo + name, {type: file.type})
           index += step
           isExist(md5, fileslice, splitFun, function () {})
-          // upSplit(file, data)
         }
       }
       function isExist (md5, fileslice, exist, notExist) {
-        that.axios.post('http://localhost:8081/upload/isexists', that.qs.stringify({ fatherMD5: md5, splitNo: splitNo })).then((res) => {
+        that.axios.post(url + '/isexists', that.qs.stringify({ fatherMD5: md5, splitNo: splitNo })).then((res) => {
           if (res.data.isexists === true) {
             console.log('@isExist ' + splitNo + ' status == true')
             complete = 100
@@ -85,7 +106,7 @@ export default {
             loadNext()
           } else {
             md5 = spark.end()
-            preUpload(md5, splitFun, error)
+            preUpload(md5)
             // console.log('computed hash', md5)
           }
         }
@@ -99,20 +120,20 @@ export default {
         }
         loadNext()
       }
-      function preUpload (md5, success, error) {
+      function preUpload (md5) {
         var preUploadData = {
           fatherMD5: md5,
           fileName: name,
           split: split,
           size: size,
-          userid: 1,
-          noticeid: 15,
+          userid: data.userid,
+          noticeid: data.noticeid,
           splitsize: 10485670
         }
-        that.axios.post('http://localhost:8081/upload/preupload', that.qs.stringify(preUploadData)).then((res) => {
+        that.axios.post(url + '/preupload', that.qs.stringify(preUploadData)).then((res) => {
           if (res.data.status === '1') {
             console.log('@preupload status == 1')
-            success(md5)
+            splitFun(md5)
           } else {
             console.log('@preupload status != 1')
             error()
@@ -127,16 +148,15 @@ export default {
         filedata.append('filedata', file)
         var config = {
           onUploadProgress: progressEvent => {
-            complete = (progressEvent.loaded / progressEvent.total * 100 | 0)
-            complete = complete * (step * splitNo + file.size) / size
+            complete = (progressEvent.loaded / progressEvent.total)
+            complete = (step * splitNo + complete * file.size) / size
             updateProgress(complete)
           }
         }
-        that.axios.post(url, filedata, config).then((res) => {
+        that.axios.post(url + '/upload', filedata, config).then((res) => {
           if (res.data.status === '1') {
             splitNo++
             splitFun(md5)
-            // success()
           } else {
             error()
           }

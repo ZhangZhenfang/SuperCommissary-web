@@ -1,16 +1,16 @@
 <template>
-  <div id="upfile-div">
+  <div id="upfile-div" ref="upfile-div">
     <div id="upfile-left">
       <el-collapse @change="handleChange">
         <el-collapse-item v-for="notice in notices" :name="notice.noticeid" :key="notice.noticeid">
-          <template slot="title">{{ notice.notice }}</template>
+          <template slot="title"><p class="el-collpase-item-title">{{ notice.notice }}</p></template>
           <el-form label-width="80px">
             <div class="notice-info-div">
                 发布人：{{ notice.user.name }}<br>
                 时间：{{ notice.starttime }} -- {{ notice.deadline }}<br>
                 注意事项：{{ notice.description }}<br>
-                我的提交：{{ notice.mysubmt == null ? '未提交' : notice.mysubmt.filename }}
-                <UploadFile :noticeId="notice.noticeid"/>
+                我的提交：<a @click="download(notice)">{{ notice.mysubmt == null ? '未提交' : notice.mysubmt.filename }}</a>
+                <UploadFile :notice="notice" :noticeId="notice.noticeid" :noticeUserId='notice.user.userid'/>
             </div>
           </el-form>
         </el-collapse-item>
@@ -50,6 +50,15 @@ export default {
     }
   },
   methods: {
+    download (notice) {
+      if (notice.mysubmt != null) {
+        var a = document.createElement('a')
+        a.href = 'http://39.108.61.189:8081/download/downloadFile?md5=' + notice.mysubmt.md5
+        this.$refs['upfile-div'].append(a)
+        a.click()
+        a.remove()
+      }
+    },
     handleChange (val) {
     },
     getNoticesFromFriend () {
@@ -78,33 +87,45 @@ export default {
 
 <style>
 #upfile-div {
+  background-color: aliceblue;
   width: 100%;
-  height: 500px;
+  float: left;
+  /* border: 2px solid pink; */
 }
 #upfile-left {
   float: left;
   width: 59%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 #upfile-right {
   float: left;
   width: 40%;
-  height: 100%;
+  height: 900px;
   border: 1px solid black;
 }
 #upfile-right-top {
   width: 99%;
   height: 30%;
-  border: 1px solid black;
+  float: left;
+  border: 1px solid rgb(69, 37, 209);
 }
-#upfile-right-botton {
+#upfile-right-bottom {
   width: 99%;
   height: 70%;
-  border: 1px solid black;
+  float: left;
+  border: 1px solid rgb(187, 26, 26);
 }
 .notice-info-div {
-  background-color: rgb(216, 218, 217);
+  background-color: rgb(236, 236, 236);
   padding: 20px 20px 20px 20px;
   width: 100%;
+  line-height: 36px;
+  font-size: 16px;
+}
+.el-collapse-item {
+  font-size: 20px;
+}
+.el-collpase-item-title {
+  font-size: 16px;
 }
 </style>

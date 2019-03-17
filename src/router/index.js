@@ -23,16 +23,21 @@ export default new Router({
       name: 'Test',
       component: Test
     },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    },
+    // {
+    //   path: '/login',
+    //   name: 'Login',
+    //   component: Login
+    // },
     {
       path: '/main',
       name: 'Main',
       component: Main,
       children: [
+        {
+          path: 'login',
+          name: 'Login',
+          component: Login
+        },
         {
           path: 'upfile',
           component: Upfile

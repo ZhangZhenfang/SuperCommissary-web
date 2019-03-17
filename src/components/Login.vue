@@ -1,18 +1,28 @@
 <template>
-  <div id="login-div">
-    <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="账号" prop="account">
-        <el-input size="medium" autofocus type="text" v-model="ruleForm2.account" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input size="medium" type="password" v-model="ruleForm2.password" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button size="medium" type="primary" @click="submitForm('ruleForm2')">登录</el-button>
-        <el-button size="medium" @click="resetForm('ruleForm2')">重置</el-button>
-      </el-form-item>
-    </el-form>
-    {{ loginStatus }}
+  <div id="login">
+    <div id="advertisement">
+      <el-carousel height="150px">
+      <el-carousel-item v-for="item in ads" :key="item.id">
+        <img :src="item.url">
+        <!-- <h3>{{ item }}</h3> -->
+      </el-carousel-item>
+    </el-carousel>
+    </div>
+    <div id="login-div">
+      <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="账号" prop="account">
+          <el-input size="medium" autofocus type="text" v-model="ruleForm2.account" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input size="medium" type="password" v-model="ruleForm2.password" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button size="medium" type="primary" @click="submitForm('ruleForm2')">登录</el-button>
+          <el-button size="medium" @click="resetForm('ruleForm2')">重置</el-button>
+        </el-form-item>
+      </el-form>
+      {{ loginStatus }}
+    </div>
   </div>
 </template>
 <script>
@@ -34,6 +44,16 @@ export default {
       }
     }
     return {
+      ads: [
+        {
+          id: 1,
+          url:'https://s2.best-wallpaper.net/wallpaper/1920x1200/1201/Two-pink-chrysanthemum_1920x1200.jpg'
+        },
+        {
+          id: 2,
+          url:'../assets/img2.jpg'
+        }
+      ],
       ruleForm2: {
         account: '',
         password: ''
@@ -65,7 +85,7 @@ export default {
               this.loginStatus = '用户名或密码错误'
             } else {
               this.loginStatus = ''
-              this.$router.push('/main')
+              this.$router.push('/main/upfile')
             }
           }).catch((error) => {
             console.log(error)
@@ -84,16 +104,25 @@ export default {
 }
 </script>
 <style scoped>
+#login {
+  width: 100%;
+  height: 500px;
+  background-color: whitesmoke;
+  margin-top: 30px;
+}
+#advertisement {
+  width: 60%;
+  float: left;
+  border: 1px solid red;
+}
 #login-div {
-  position:absolute;
-  top:50%;
-  left:50%;
-  margin-top:-150px;
-  margin-left:-225px;
-  padding:20px 40px 0px 0px;
-  height:300px;
-  width:450px;
-  border:1px solid rgb(0, 0, 0);
+  padding-top: 150px;
+  padding-right: 60px;
+  height: 350px;
+  width: 35%;
+  float: left;
+  border: 1px solid rgb(0, 0, 0);
   text-align: center;
+  background-color: white;
 }
 </style>

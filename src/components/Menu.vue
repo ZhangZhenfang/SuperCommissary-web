@@ -4,17 +4,18 @@
       this is left
     </div>
     <div id="top-mid-div" class="top-div">
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1">处理中心</el-menu-item>
-        <el-menu-item index="2">处理中心</el-menu-item>
-        <el-menu-item index="3">消息中心</el-menu-item>
-        <el-menu-item index="4">订单管理</el-menu-item>
+      <el-menu size="large" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu-item index="1">上传文件</el-menu-item>
+        <el-menu-item index="2">我的公告</el-menu-item>
+        <el-menu-item index="3">上传表格</el-menu-item>
+        <el-menu-item index="4">填写表格</el-menu-item>
       </el-menu>
     </div>
     <div id="top-right-div" class="top-div">
       <el-dropdown>
         <span class="el-dropdown-link">
-          张振方<i class="el-icon-arrow-down el-icon--right"></i>
+          <span @click="clickUserName()">{{ username }}</span>
+          <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人中心</el-dropdown-item>
@@ -32,10 +33,32 @@ export default {
   data () {
     return {
       activeIndex: '1',
-      activeIndex2: '1'
+      activeIndex2: '1',
+      username: '请登录'
     }
   },
+  mounted () {
+    this.axios.get(
+      'http://www.the15373.com/users/getUserinfo'
+    ).then((response) => {
+      console.log(response)
+      if (response.data.status === 0) {
+        this.username = '请登录'
+        this.$router.push('/main/login')
+      } else {
+        console.log(response.data)
+        this.username = response.data.data.name
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
   methods: {
+    clickUserName () {
+      if (this.username === '请登录') {
+        this.$router.push("/main/login")
+      }
+    },
     handleSelect (key, keyPath) {
       console.log(key)
       switch (key) {
@@ -89,6 +112,9 @@ export default {
     color: rgb(0, 0, 0);
   }
   .el-icon-arrow-down {
-    font-size: 12px;
+    font-size: 16px;
+  }
+  .el-menu-item {
+    font-size: 18px;
   }
 </style>

@@ -10,12 +10,12 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to dochub!'
+      msg: 'Welcome to SuperCommissary!'
     }
   },
   methods: {
     gotoLogin () {
-      this.$router.push('/login')
+      this.$router.push('/main/login')
     }
   }
 }

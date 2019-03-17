@@ -1,8 +1,9 @@
 <template>
   <div id="main">
-    <div class="main-div"><Menu></Menu></div>
-    <div class="main-div"><router-view/></div>
-    <div class="main-div"><Footer></Footer></div>
+    <div id="main-div-menu"><Menu></Menu></div>
+    <div id="main-wall"></div>
+    <div id="main-div-router"><router-view/></div>
+    <div id="main-div-footer"><Footer></Footer></div>
   </div>
 </template>
 <script>
@@ -12,6 +13,8 @@ import Footer from './Footer.vue'
 export default {
   name: 'Main',
   components: { Menu, Footer },
+  mounted () {
+  },
   data () {
     return {
       message: 'This is content.'
@@ -22,10 +25,29 @@ export default {
 
 <style>
 #main {
-  margin: 10px 150px 60px 150px;
+  margin: 10px 150px 5px 150px;
+  height: 98%;
+  border: 1px solid green;
 }
-.main-div {
+#main-div-menu {
   width: 100%;
   float: left;
+  height: 12%;
+}
+#main-div-router {
+  width: 99%;
+  float: left;
+}
+#main-wall {
+  width: 0%;
+  float: left;
+  height: 77%;
+  border: 1px solid rgb(63, 0, 235);
+}
+#main-div-footer {
+  margin-top: 40px;
+  width: 100%;
+  float: left;
+  height: 85px;
 }
 </style>
