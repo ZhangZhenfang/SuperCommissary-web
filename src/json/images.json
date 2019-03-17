@@ -1,0 +1,12 @@
+{
+  "srcs": [
+    {
+      "id": 1,
+      "src": "../assets/img1.jpg"
+    },
+    {
+      "id": 2,
+      "src": "../assets/img2.jpg"
+    }
+  ]
+}
