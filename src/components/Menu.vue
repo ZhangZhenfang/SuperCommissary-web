@@ -1,7 +1,7 @@
 <template>
   <div id="top-div">
     <div id="top-left-div" class="top-div">
-      this is left
+      <h2>SuperCommissary</h2>
     </div>
     <div id="top-mid-div" class="top-div">
       <el-menu size="large" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -22,7 +22,6 @@
           <el-dropdown-item>注销</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <!-- this is right -->
     </div>
   </div>
 </template>
@@ -56,7 +55,7 @@ export default {
   methods: {
     clickUserName () {
       if (this.username === '请登录') {
-        this.$router.push("/main/login")
+        this.$router.push('/main/login')
       }
     },
     handleSelect (key, keyPath) {
@@ -72,11 +71,11 @@ export default {
           break
         case '3':
           console.log()
-          this.$router.push('/main/mytable')
+          this.$router.push('/main/uptable')
           break
         case '4':
           console.log()
-          this.$router.push('/main/uptable')
+          this.$router.push('/main/mytable')
           break
         default:
           console.log()
@@ -92,6 +91,7 @@ export default {
   }
   #top-left-div {
     width: 30%;
+    text-align: center;
   }
   #top-right-div {
     width: 20%;

@@ -3,7 +3,7 @@
     <div id="advertisement">
       <el-carousel height="500px">
       <el-carousel-item v-for="item in ads" :key="item.id">
-        <a href="">
+        <a :href="item.linkUrl" target="_blank">
           <p>{{ item.title }}</p>
           <img :src="item.url">
         </a>
@@ -29,8 +29,6 @@
   </div>
 </template>
 <script>
-import img1 from '../assets/img1.jpg'
-import img2 from '../assets/img2.jpg'
 export default {
   name: 'Login',
   data () {

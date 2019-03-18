@@ -1,11 +1,11 @@
 <template>
-  <div id="uptable-div">
-    <div id="uptable-advertisement-div">
+  <div id="newnotice-div">
+    <div id="newnotice-advertisement-div">
     </div>
-    <div id="uptable-form-div">
+    <div id="newnotice-form-div">
       <el-form ref="ruleForm" :model="form" :rules="rules" label-width="80px">
-      <el-form-item label="Excel文件" prop="name">
-        <el-input ref="excel-file-input" v-model="form.name" type="file" />
+      <el-form-item label="公告名称" prop="name">
+        <el-input v-model="form.name"></el-input>
       </el-form-item>
       <el-form-item prop="startdate" label="开始时间">
         <el-col :span="11">
@@ -31,8 +31,8 @@
         <el-input type="textarea" v-model="form.desc" placeholder="随便说点什么吧"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">提交</el-button>
-        <!-- <el-button @click="goback">返回我的公告</el-button> -->
+        <el-button type="primary" @click="onSubmit">立即新建</el-button>
+        <el-button @click="goback">返回我的公告</el-button>
       </el-form-item>
     </el-form>
     </div>
@@ -42,7 +42,7 @@
 <script>
 import {formatDate} from '../../util/date.js'
 export default {
-  name: 'Uptable',
+  name: 'NewNotice',
   data () {
     return {
       form: {
@@ -80,24 +80,14 @@ export default {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
           var data = {
-            //notice: this.$refs['excel-file-input'].getInput().files[0],
+            notice: this.form.name,
             startdate: formatDate(this.form.startdate, 'yyyy-MM-dd'),
             starttime: formatDate(this.form.starttime, 'hh:mm:ss'),
             deadlinedate: formatDate(this.form.deadlinedate, 'yyyy-MM-dd'),
             deadlinetime: formatDate(this.form.deadlinetime, 'hh:mm:ss'),
             description: this.form.desc
           }
-          var file = this.$refs['excel-file-input'].getInput().files[0]
-          if (!/(.xls|.xlsx)$/.test(file.name)) {
-            this.$message('只能上传以xls和xlsx结尾的文件！')
-          } else {
-            var formdata = new FormData()
-            for (var x in data) {
-              formdata.append(x, data[x])
-            }
-            formdata.append('filedata', file)
-            this.newExcel(formdata)
-          }
+          this.newNotice(data)
         } else {
           console.log('error submit!!')
           return false
@@ -111,14 +101,14 @@ export default {
       var date = new Date(time)
       return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
     },
-    newExcel (data) {
-      this.axios.post('http://www.the15373.com' + '/excels/uploadExcel', data).then((res) => {
+    newNotice (data) {
+      this.axios.post('http://www.the15373.com/notices/newNotice', this.qs.stringify(data)).then((res) => {
         if (res.data.status === '1') {
-          this.$refs['ruleForm'].resetFields()
-          this.$message('上传成功！')
+          console.log('success')
+          this.$message('新建公告成功！')
         } else {
-          this.$refs['ruleForm'].resetFields()
-          this.$message('上传失败！')
+          this.$message('新建公告失败！')
+          console.log('error')
         }
       })
     }
@@ -127,19 +117,19 @@ export default {
 </script>
 
 <style>
-#uptable-div {
+#newnotice-div {
   width: 100%;
   height: 100%;
   padding-top: 30px;
 }
-#uptable-form-div {
+#newnotice-form-div {
   padding-top: 90px;
   width: 38%;
   height: 600px;
   float: left;
   margin-left: 30px;
 }
-#uptable-advertisement-div {
+#newnotice-advertisement-div {
   width: 55%;
   height: 600px;;
   float: left;

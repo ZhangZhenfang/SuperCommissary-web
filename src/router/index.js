@@ -6,6 +6,7 @@ import Main from '@/components/Main'
 import Upfile from '@/components/content/Upfile'
 import Uptable from '@/components/content/Uptable'
 import Notice from '@/components/content/Notice'
+import NewNotice from '@/components/content/NewNotice'
 import Mytable from '@/components/content/Mytable'
 import Test from '@/components/Test'
 
@@ -49,6 +50,10 @@ export default new Router({
         {
           path: 'notice',
           component: Notice
+        },
+        {
+          path: '/main/notice/newnotice',
+          component: NewNotice
         },
         {
           path: 'mytable',
