@@ -23,7 +23,7 @@ export default {
   data () {
     return {
       message: 'This is content.',
-      /**computed和watch的区别 */
+      /** computed和watch的区别 */
       menuActiveIndex: '1'
     }
   }

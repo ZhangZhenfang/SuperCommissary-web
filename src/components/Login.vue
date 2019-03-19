@@ -12,18 +12,20 @@
     </el-carousel>
     </div>
     <div id="login-div">
-      <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="账号" prop="account">
-          <el-input size="medium" autofocus type="text" v-model="ruleForm2.account" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input size="medium" type="password" v-model="ruleForm2.password" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button size="medium" type="primary" @click="submitForm('ruleForm2')">登录</el-button>
-          <el-button size="medium" @click="resetForm('ruleForm2')">重置</el-button>
-        </el-form-item>
-      </el-form>
+      <div id="login-form-div">
+        <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+          <el-form-item label="账号" prop="account">
+            <el-input size="medium" width="200" autofocus type="text" v-model="ruleForm2.account" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="password">
+            <el-input size="medium" type="password" v-model="ruleForm2.password" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button size="medium" type="primary" @click="submitForm('ruleForm2')">登录</el-button>
+            <el-button size="medium" @click="resetForm('ruleForm2')">重置</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
       {{ loginStatus }}
     </div>
   </div>
@@ -173,5 +175,11 @@ export default {
   border: 1px solid rgb(0, 0, 0);
   text-align: center;
   background-color: white;
+}
+#login-form-div {
+  width: 300px;
+}
+.el-input {
+  width:350px;
 }
 </style>

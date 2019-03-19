@@ -34,10 +34,10 @@
         <div id="myfile">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>卡片名称</span>
+              <span>我的文件</span>
             </div>
-            <div v-for="o in 4" :key="o" class="text item">
-              <a href="">{{ o }}</a>
+            <div v-for="o in myfiles" :key="o.fileid" class="text item">
+              <a @click="downloadFile(o.md5)">{{ o.filename }} ———— {{ o.noticeName }}</a>
             </div>
           </el-card>
         </div>
@@ -73,10 +73,24 @@ export default {
         }
       ],
       select: '1',
-      condition: ''
+      condition: '',
+      myfiles: [
+      ]
     }
   },
   methods: {
+    downloadFile (md5) {
+      console.log(md5)
+      window.location.href = URLS.fileserver + '/download/downloadFile?md5=' + md5
+    },
+    getMyFiles () {
+      this.axios.post(URLS.dochubapi + '/files/getMyFiles').then((response) => {
+        if (response.data.status === '1') {
+          this.myfiles = response.data.data
+          console.log(this.myfiles)
+        }
+      })
+    },
     getNoticesByCondition (code) {
       if (this.condition === '' && (code === '1' || code === '2')) {
         this.$refs['condition-input'].focus()
@@ -125,6 +139,7 @@ export default {
   mounted () {
     this.getNoticesFromFriend()
     this.$emit('updateActivindex', '1')
+    setTimeout(this.getMyFiles, 1000)
   }
 }
 </script>
@@ -134,12 +149,10 @@ export default {
   background-color: aliceblue;
   width: 100%;
   float: left;
-  /* border: 2px solid pink; */
 }
 #upfile-left {
   float: left;
   width: 59%;
-  /* border: 1px solid black; */
 }
 #upfile-right {
   float: left;
@@ -149,12 +162,12 @@ export default {
 }
 #upfile-right-top {
   width: 99%;
-  height: 30%;
+  height: 15%;
   float: left;
   border: 1px solid rgb(69, 37, 209);
 }
 #upfile-right-top-inner {
-  margin-top: 30px;
+  margin-top: 15px;
   margin-left: 30px;
   margin-right: 30px;
   text-align: center;
@@ -164,7 +177,7 @@ export default {
 }
 #upfile-right-bottom {
   width: 99%;
-  height: 70%;
+  height: 60%;
   float: left;
   border: 1px solid rgb(187, 26, 26);
 }
@@ -187,36 +200,33 @@ export default {
 .input-with-select .el-input-group__prepend {
   background-color: #fff;
 }
-#myfile{
-	margin-top: 20px;
-	width: 100%;
-	height: 600px;
-	overflow-y: scroll; 
-	overflow-x: scroll;
-	float: left;
+#myfile {
+  margin-top: 20px;
+  width: 90%;
+  height: 600px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  float: left;
   padding-left: 30px;
-	/* border: 1px solid blue; */
 }
-#myfile-label{
-	font-size: 20px;
-	width: 100%;
-	text-align: center;
+#myfile-label {
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
 }
-.myfile-a{
-	font-size: 14px;
-	color: black;
+.myfile-a {
+  font-size: 14px;
+  color: black;
 }
-.myfile-a:hover{
-	cursor: pointer;
+.myfile-a:hover {
+  cursor: pointer;
 }
 .text {
   font-size: 14px;
 }
-
 .item {
   margin-bottom: 18px;
 }
-
 .clearfix:before, .clearfix:after {
   display: table;
   content: "";
@@ -224,8 +234,16 @@ export default {
 .clearfix:after {
   clear: both
 }
-
 .box-card {
-  width: 92%;
+  width: 98%;
+}
+.box-card a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+.box-card a:hover {
+  color: rgb(25, 0, 255);
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>
