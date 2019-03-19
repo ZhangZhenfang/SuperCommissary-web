@@ -80,7 +80,6 @@ export default {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
           var data = {
-            //notice: this.$refs['excel-file-input'].getInput().files[0],
             startdate: formatDate(this.form.startdate, 'yyyy-MM-dd'),
             starttime: formatDate(this.form.starttime, 'hh:mm:ss'),
             deadlinedate: formatDate(this.form.deadlinedate, 'yyyy-MM-dd'),

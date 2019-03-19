@@ -32,7 +32,6 @@ export default {
   data () {
     return {
       activeIndex: '1',
-      activeIndex2: '1',
       username: '请登录'
     }
   },
@@ -45,7 +44,6 @@ export default {
         this.username = '请登录'
         this.$router.push('/main/login')
       } else {
-        console.log(response.data)
         this.username = response.data.data.name
       }
     }).catch((error) => {
@@ -62,23 +60,23 @@ export default {
       console.log(key)
       switch (key) {
         case '1':
-          console.log()
+          this.activeIndex = '1'
           this.$router.push('/main/upfile')
           break
         case '2':
-          console.log()
+        this.activeIndex = '2'
           this.$router.push('/main/notice')
           break
         case '3':
-          console.log()
+        this.activeIndex = '3'
           this.$router.push('/main/uptable')
           break
         case '4':
-          console.log()
+        this.activeIndex = '4'
           this.$router.push('/main/mytable')
           break
         default:
-          console.log()
+        this.activeIndex = '1'
           this.$router.push('/main/upfile')
       }
     }
