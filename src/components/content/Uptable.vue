@@ -32,7 +32,6 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">提交</el-button>
-        <!-- <el-button @click="goback">返回我的公告</el-button> -->
       </el-form-item>
     </el-form>
     </div>
@@ -124,7 +123,7 @@ export default {
     }
   },
   mounted () {
-    this.$emit('updateActivindex', '3');
+    this.$emit('updateActivindex', '3')
   }
 }
 </script>

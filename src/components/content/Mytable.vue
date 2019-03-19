@@ -47,7 +47,7 @@ export default {
   },
   mounted () {
     this.getExcelList()
-    this.$emit('updateActivindex', '4');
+    this.$emit('updateActivindex', '4')
   }
 }
 </script>

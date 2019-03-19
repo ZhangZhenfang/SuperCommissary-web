@@ -24,11 +24,6 @@ export default new Router({
       name: 'Test',
       component: Test
     },
-    // {
-    //   path: '/login',
-    //   name: 'Login',
-    //   component: Login
-    // },
     {
       path: '/main',
       name: 'Main',

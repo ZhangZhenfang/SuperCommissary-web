@@ -58,7 +58,6 @@ export default {
         userid: this.noticeUserId,
         noticeid: this.noticeId
       }
-      // console.log(this.fileToUpload, data)
       this.showPercent = true
       this.btnSwitcher = true
       this.percet = 0
@@ -92,6 +91,9 @@ export default {
         this.btnSwitcher = false
       })
     },
+    /**
+     * 上传文件，闭包问题
+     */
     upFile (file, data, url, updateProgress, success, error) {
       var totalLoaded = 0
       var complete = 0
@@ -103,6 +105,9 @@ export default {
       var step = 10485670
       var split = Math.ceil(size / step)
       var splitNo = 0
+      /**
+       * 计算文件的MD5
+       */
       computeMD5(file)
       function combine () {
         that.axios.post(url + '/combine', that.qs.stringify({ md5: md5 })).then((res) => {
@@ -113,6 +118,9 @@ export default {
           }
         })
       }
+      /**
+       * 文件分片上传，如果该片已经在服务器上存在，则直接跳过，知道所有的分片上传完成后发送文件合并命令
+       */
       function splitFun () {
         if (splitNo >= split) {
           console.log(totalLoaded)
@@ -125,6 +133,9 @@ export default {
           isExist(fileslice, splitFun, function () {})
         }
       }
+      /**
+       * 判断文件是否在服务器上存在，如果存在则分割下一片，否则执行上传分片
+       */
       function isExist (fileslice, exist, notExist) {
         that.axios.post(url + '/isexists', that.qs.stringify({ fatherMD5: md5, splitNo: splitNo })).then((res) => {
           if (res.data.isexists === true) {
@@ -136,13 +147,15 @@ export default {
             updateProgress(complete)
             splitNo++
             splitFun()
-            // success(md5)
           } else {
             console.log('@isExist ' + splitNo + ' status == false')
             upSplit(fileslice, { fatherMD5: md5, splitNo: splitNo })
           }
         })
       }
+      /**
+       * 计算文件的MD5
+       */
       function computeMD5 (file) {
         var fileReader = new FileReader()
         var blobSlice = File.prototype.mozSlice || File.prototype.webkitSlice || File.prototype.slice
@@ -167,6 +180,9 @@ export default {
         }
         loadNext()
       }
+      /**
+       * 进行上传文件前的准备
+       */
       function preUpload () {
         var preUploadData = {
           fatherMD5: md5,
@@ -187,6 +203,9 @@ export default {
           }
         })
       }
+      /**
+       * 上传分片
+       */
       function upSplit (file, data) {
         var filedata = new FormData()
         for (var x in data) {

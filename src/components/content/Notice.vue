@@ -102,7 +102,7 @@ export default {
   },
   mounted () {
     this.getMyNotice()
-    this.$emit('updateActivindex', '2');
+    this.$emit('updateActivindex', '2')
   }
 }
 </script>

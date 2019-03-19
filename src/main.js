@@ -14,6 +14,15 @@ Vue.use(ElementUI)
 Vue.prototype.axios = axios
 Vue.prototype.qs = Qs
 
+axios.interceptors.response.use(function (response) {
+  console.log(response.data)
+  if (response.data.status === 0) {
+    router.push('/main/login')
+    return response
+  } else {
+    return response
+  }
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
