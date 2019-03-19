@@ -4,7 +4,7 @@
       <h2>SuperCommissary</h2>
     </div>
     <div id="top-mid-div" class="top-div">
-      <el-menu size="large" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+      <el-menu size="large" :default-active="menuActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <el-menu-item index="1">上传文件</el-menu-item>
         <el-menu-item index="2">我的公告</el-menu-item>
         <el-menu-item index="3">上传表格</el-menu-item>
@@ -29,9 +29,9 @@
 <script>
 export default {
   name: 'Menu',
+  props: ['menuActiveIndex'],
   data () {
     return {
-      activeIndex: '1',
       username: '请登录'
     }
   },
@@ -60,23 +60,18 @@ export default {
       console.log(key)
       switch (key) {
         case '1':
-          this.activeIndex = '1'
           this.$router.push('/main/upfile')
           break
         case '2':
-        this.activeIndex = '2'
           this.$router.push('/main/notice')
           break
         case '3':
-        this.activeIndex = '3'
           this.$router.push('/main/uptable')
           break
         case '4':
-        this.activeIndex = '4'
           this.$router.push('/main/mytable')
           break
         default:
-        this.activeIndex = '1'
           this.$router.push('/main/upfile')
       }
     }

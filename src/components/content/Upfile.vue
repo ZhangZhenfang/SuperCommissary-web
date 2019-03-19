@@ -24,7 +24,9 @@
 </template>
 
 <script>
-import UploadFile from '../UploadFile.vue'
+import UploadFile from './UploadFile.vue'
+import URLS from '../../json/urls.json'
+
 export default {
   name: 'Upfile',
   components: { UploadFile },
@@ -53,7 +55,7 @@ export default {
     download (notice) {
       if (notice.mysubmt != null) {
         var a = document.createElement('a')
-        a.href = 'http://39.108.61.189:8081/download/downloadFile?md5=' + notice.mysubmt.md5
+        a.href = URLS.fileserver + '/download/downloadFile?md5=' + notice.mysubmt.md5
         this.$refs['upfile-div'].append(a)
         a.click()
         a.remove()
@@ -62,8 +64,9 @@ export default {
     handleChange (val) {
     },
     getNoticesFromFriend () {
+      console.log(URLS['dochubapi'])
       this.axios.post(
-        'http://www.the15373.com/notices/getNoticesFromFriends',
+        URLS.dochubapi + '/notices/getNoticesFromFriends',
         this.qs.stringify(),
         {
           headers: {
@@ -81,6 +84,7 @@ export default {
   },
   mounted () {
     this.getNoticesFromFriend()
+    this.$emit('updateActivindex', '1');
   }
 }
 </script>

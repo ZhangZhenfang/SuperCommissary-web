@@ -41,6 +41,7 @@
 
 <script>
 import {formatDate} from '../../util/date.js'
+import URLS from '../../json/urls.json'
 export default {
   name: 'Uptable',
   data () {
@@ -111,7 +112,7 @@ export default {
       return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
     },
     newExcel (data) {
-      this.axios.post('http://www.the15373.com' + '/excels/uploadExcel', data).then((res) => {
+      this.axios.post(URLS.dochubapi + '/excels/uploadExcel', data).then((res) => {
         if (res.data.status === '1') {
           this.$refs['ruleForm'].resetFields()
           this.$message('上传成功！')
@@ -121,6 +122,9 @@ export default {
         }
       })
     }
+  },
+  mounted () {
+    this.$emit('updateActivindex', '3');
   }
 }
 </script>

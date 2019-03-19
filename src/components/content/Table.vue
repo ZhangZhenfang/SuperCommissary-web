@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import URLS from '../../json/urls.json'
 export default {
   name: 'Table',
   props: ['tablehtml', 'tableid', 'mysubmit', 'recordid'],
@@ -106,7 +107,7 @@ export default {
     },
     insertOrUpdateExcelrecord (id, data) {
       console.log({ excelId: this.tableid, record: data })
-      this.axios.post('http://www.the15373.com' + '/excelrecords/insertOrUpdateExcelrecord', this.qs.stringify({ excelId: this.tableid, record: data })).then((res) => {
+      this.axios.post(URLS.dochubapi + '/excelrecords/insertOrUpdateExcelrecord', this.qs.stringify({ excelId: this.tableid, record: data })).then((res) => {
         if (res.data.status === '1') {
           this.$message('提交成功！')
         } else {

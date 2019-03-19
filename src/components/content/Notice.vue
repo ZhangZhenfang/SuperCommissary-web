@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import URLS from '../../json/urls.json'
 export default {
   name: 'Notice',
   data () {
@@ -45,14 +46,14 @@ export default {
   methods: {
     download (md5) {
       var a = document.createElement('a')
-      a.href = 'http://39.108.61.189:8081/download/downloadFile?md5=' + md5
+      a.href = URLS.fileserver + '/download/downloadFile?md5=' + md5
       this.$refs['notice-div'].append(a)
       a.click()
       a.remove()
     },
     getMyNotice () {
       this.axios.post(
-        'http://www.the15373.com/notices/getMyNotice',
+        URLS.dochubapi + '/notices/getMyNotice',
         this.qs.stringify(),
         {
           headers: {
@@ -71,7 +72,7 @@ export default {
       this.$router.push('/main/notice/newnotice')
     },
     downloadNotice (userid, noticeid, name) {
-      window.location.href = 'http://39.108.61.189:8081/download/downloadZip?path=noticedata/' + userid + '/' + noticeid + '&name=' + name
+      window.location.href = URLS.fileserver + '/download/downloadZip?path=noticedata/' + userid + '/' + noticeid + '&name=' + name
     },
     deleteNotice (noticeid) {
       this.$confirm('此操作将失去对该公告下的所有文件的控制权, 是否继续?', '提示', {
@@ -79,7 +80,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.axios.post('http://www.the15373.com/notices/deleteNotice', this.qs.stringify({
+        this.axios.post(URL.dochubapi + '/notices/deleteNotice', this.qs.stringify({
           noticeId: noticeid
         })).then((res) => {
           if (res.data.status === '1') {
@@ -101,6 +102,7 @@ export default {
   },
   mounted () {
     this.getMyNotice()
+    this.$emit('updateActivindex', '2');
   }
 }
 </script>

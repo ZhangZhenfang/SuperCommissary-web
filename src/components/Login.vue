@@ -29,6 +29,7 @@
   </div>
 </template>
 <script>
+import URLS from '../json/urls.json'
 export default {
   name: 'Login',
   data () {
@@ -104,7 +105,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.axios.get(
-            'http://www.the15373.com/users/auth',
+            URLS.dochubapi + '/users/auth',
             {
               params: this.ruleForm2
             }

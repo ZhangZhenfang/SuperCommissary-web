@@ -12,6 +12,7 @@
 
 <script>
 import SparkMD5 from 'spark-md5'
+import URLS from '../../json/urls.json'
 export default {
   name: 'UploadFile',
   data () {
@@ -61,7 +62,7 @@ export default {
       this.showPercent = true
       this.btnSwitcher = true
       this.percet = 0
-      this.upFile(this.fileToUpload, data, 'http://39.108.61.189:8081/upload', this.updateProgress, this.success, this.error)
+      this.upFile(this.fileToUpload, data, URLS.fileserver + '/upload', this.updateProgress, this.success, this.error)
     },
     updateProgress (progress) {
       console.log(this.percet)
@@ -73,7 +74,7 @@ export default {
       this.$notify.error({ title: '错误', message: '上传失败' })
     },
     success (md5, data) {
-      this.axios.post('http://www.the15373.com/files/uploadFile', this.qs.stringify({
+      this.axios.post(URLS.dochubapi + '/files/uploadFile', this.qs.stringify({
         md5: md5,
         noticeid: data.noticeid,
         fileName: this.fileToUpload.name })).then((res) => {
@@ -213,9 +214,6 @@ export default {
 }
 </script>
 <style>
-#uploadfile-div {
-  /* margin: 0px 10px 10px 10px; */
-}
 #uploadfile-process-div {
   margin-top: 10px;
   width: 80%;

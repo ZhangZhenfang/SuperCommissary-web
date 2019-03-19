@@ -1,8 +1,8 @@
 <template>
   <div id="main">
-    <div id="main-div-menu"><Menu></Menu></div>
+    <div id="main-div-menu"><Menu :menuActiveIndex="menuActiveIndex"></Menu></div>
     <div id="main-wall"></div>
-    <div id="main-div-router"><router-view/></div>
+    <div id="main-div-router"><router-view  v-on:updateActivindex="updateActivindex"/></div>
     <div id="main-div-footer"><Footer></Footer></div>
   </div>
 </template>
@@ -15,9 +15,15 @@ export default {
   components: { Menu, Footer },
   mounted () {
   },
+  methods: {
+    updateActivindex (index) {
+      this.menuActiveIndex = index
+    }
+  },
   data () {
     return {
-      message: 'This is content.'
+      message: 'This is content.',
+      menuActiveIndex: '1'
     }
   }
 }
