@@ -14,15 +14,15 @@
     <div id="login-div">
       <div id="login-form-div">
         <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-          <el-form-item label="账号" prop="account">
-            <el-input size="medium" width="200" autofocus type="text" v-model="ruleForm2.account" autocomplete="off"></el-input>
+          <el-form-item label="账 号" prop="account">
+            <el-input prefix-icon="el-icon-date" size="large" minlength="100" autofocus type="text" v-model="ruleForm2.account" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="password">
-            <el-input size="medium" type="password" v-model="ruleForm2.password" autocomplete="off"></el-input>
+          <el-form-item label="密 码" prop="password">
+            <el-input prefix-icon="el-icon-date" size="large" minlength="100" type="password" v-model="ruleForm2.password" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button size="medium" type="primary" @click="submitForm('ruleForm2')">登录</el-button>
-            <el-button size="medium" @click="resetForm('ruleForm2')">重置</el-button>
+            <el-button size="large" type="primary" @click="submitForm('ruleForm2')">登录</el-button>
+            <el-button size="large" @click="resetForm('ruleForm2')">重置</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -137,6 +137,20 @@ export default {
 }
 </script>
 <style scoped>
+#login {
+  width: 100%;
+  height: 600px;
+  background-color: gainsboro;
+  margin-top: 60px;
+}
+#advertisement {
+  padding-top: 10px;
+  width: 60%;
+  height: 590px;
+  float: left;
+  text-align: center;
+  border: 1px solid red;
+}
 #advertisement a:hover {
   color: rgb(25, 0, 255);
   text-decoration: none;
@@ -148,36 +162,30 @@ export default {
 #advertisement p {
   height: 15px;
 }
-#login {
-  width: 100%;
-  height: 500px;
-  background-color: whitesmoke;
-  margin-top: 30px;
-}
-#advertisement {
-  width: 60%;
-  height: 500px;
-  float: left;
-  text-align: center;
-  border: 1px solid red;
-}
+
 #advertisement img {
   height: 480px;
-  width: 100%;
+  width: 96%;
 }
 #login-div {
-  padding-top: 150px;
-  padding-right: 60px;
-  margin-left: 10px;
-  height: 350px;
-  width: 35%;
+  height: 600px;
+  width: 39%;
   float: left;
   border: 1px solid rgb(0, 0, 0);
   text-align: center;
-  background-color: white;
+  background-color: rgb(255, 236, 151);
+  line-height: 600px;
 }
 #login-form-div {
-  width: 300px;
+  padding-top: 200px;
+  width: 450px;
+  height: 400px;
+  margin: 0 auto;
+  border: 1px solid green;
+  background-color: wheat;
+}
+#login-form-div .el-form-item__label {
+  font-size: 25px;
 }
 .el-input {
   width:350px;

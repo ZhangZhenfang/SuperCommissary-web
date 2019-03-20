@@ -130,8 +130,8 @@ export default {
 
 <style>
 #uptable-div {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  margin: 0 auto;
   padding-top: 30px;
 }
 #uptable-form-div {

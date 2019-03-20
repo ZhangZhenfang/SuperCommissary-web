@@ -121,7 +121,8 @@ export default {
   text-decoration: none;
 }
 #notice-div {
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
 }
 .el-notice-item-div {
   border: 1px solid red;

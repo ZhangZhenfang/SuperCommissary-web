@@ -1,10 +1,10 @@
 <template>
   <div id="top-div">
     <div id="top-left-div" class="top-div">
-      <h2>SuperCommissary</h2>
+      <p>SuperCommissary</p>
     </div>
     <div id="top-mid-div" class="top-div">
-      <el-menu size="large" :default-active="menuActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+      <el-menu size="small" :default-active="menuActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <el-menu-item index="1">上传文件</el-menu-item>
         <el-menu-item index="2">我的公告</el-menu-item>
         <el-menu-item index="3">上传表格</el-menu-item>
@@ -79,19 +79,21 @@ export default {
 }
 </script>
 <style>
-  #menu-div {
-    font-size: 50px;
+  #top-div {
+    height: 100%;
+    width: 100%;
   }
   #top-left-div {
-    width: 30%;
+    width: 25%;
     text-align: center;
+    font-size: 18px;
   }
   #top-right-div {
-    width: 20%;
+    width: 15%;
     margin-top: 19px;
   }
   #top-mid-div {
-    width: 49%;
+    width: 59%;
   }
   .top-div {
     margin-bottom: 20px;

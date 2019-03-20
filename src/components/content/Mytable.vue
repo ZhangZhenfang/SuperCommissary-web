@@ -55,6 +55,8 @@ export default {
 <style>
 #mytable-div {
   background-color: whitesmoke;
+  width: 90%;
+  margin: 0 auto;
 }
 #mytable-table-div {
   background-color: rgb(228, 228, 228);

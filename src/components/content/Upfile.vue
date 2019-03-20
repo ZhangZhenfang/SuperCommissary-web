@@ -147,8 +147,8 @@ export default {
 <style>
 #upfile-div {
   background-color: aliceblue;
-  width: 100%;
-  float: left;
+  width: 90%;
+  margin: 0 auto;
 }
 #upfile-left {
   float: left;
