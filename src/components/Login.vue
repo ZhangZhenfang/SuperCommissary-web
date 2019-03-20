@@ -34,6 +34,7 @@
 import URLS from '../json/urls.json'
 export default {
   name: 'Login',
+  props: ['username', 'updateUsername'],
   data () {
     var validateAccount = (rule, value, callback) => {
       if (value === '') {
@@ -114,10 +115,11 @@ export default {
           ).then((response) => {
             console.log(response)
             if (response.data.status !== '1' && response.data.status !== '2') {
-              // alert('用户名或密码错误')
               this.loginStatus = '用户名或密码错误'
             } else {
               this.loginStatus = ''
+              /** 修改父组件的值 */
+              this.$emit('updateUsername', response.data.name)
               this.$router.push('/main/upfile')
             }
           }).catch((error) => {

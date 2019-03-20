@@ -13,9 +13,9 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.prototype.axios = axios
 Vue.prototype.qs = Qs
+Vue.prototype.vue = Vue
 
 axios.interceptors.response.use(function (response) {
-  console.log(response.data)
   if (response.data.status === 0) {
     router.push('/main/login')
     return response

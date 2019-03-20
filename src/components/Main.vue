@@ -1,7 +1,7 @@
 <template>
   <div id="main">
-    <div id="main-div-menu"><Menu :menuActiveIndex="menuActiveIndex"></Menu></div>
-    <div id="main-div-router"><router-view  v-on:updateActivindex="updateActivindex"/></div>
+    <div id="main-div-menu"><Menu :menuActiveIndex="menuActiveIndex" :username="username"></Menu></div>
+    <div id="main-div-router"><router-view  v-on:updateUsername="updateUsername" v-on:updateActivindex="updateActivindex"/></div>
     <div id="main-div-footer"><Footer></Footer></div>
   </div>
 </template>
@@ -15,12 +15,16 @@ export default {
   mounted () {
   },
   methods: {
+    updateUsername (username) {
+      this.username = username
+    },
     updateActivindex (index) {
       this.menuActiveIndex = index
     }
   },
   data () {
     return {
+      username: '请登录',
       message: 'This is content.',
       /** computed和watch的区别 */
       menuActiveIndex: '1'

@@ -7,14 +7,14 @@
       <el-menu size="small" :default-active="menuActiveIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <el-menu-item index="1">上传文件</el-menu-item>
         <el-menu-item index="2">我的公告</el-menu-item>
-        <el-menu-item index="3">上传表格</el-menu-item>
+        <el-menu-item index="3">我的表格</el-menu-item>
         <el-menu-item index="4">填写表格</el-menu-item>
       </el-menu>
     </div>
     <div id="top-right-div" class="top-div">
       <el-dropdown>
         <span class="el-dropdown-link">
-          <span @click="clickUserName()">{{ username }}</span>
+          <span @click="clickUserName()">{{ innerusername }}</span>
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -29,10 +29,17 @@
 <script>
 export default {
   name: 'Menu',
-  props: ['menuActiveIndex'],
+  props: ['menuActiveIndex', 'username'],
   data () {
     return {
-      username: '请登录'
+      innerusername: this.username
+    }
+  },
+  /** 监听父组件'username'改动后修改自己的属性值 */
+  watch: {
+    username: function (newV, oldV) {
+      console.log(newV, oldV)
+      this.innerusername = newV
     }
   },
   mounted () {
@@ -41,10 +48,10 @@ export default {
     ).then((response) => {
       console.log(response)
       if (response.data.status === 0) {
-        this.username = '请登录'
+        this.innerusername = '请登录'
         this.$router.push('/main/login')
       } else {
-        this.username = response.data.data.name
+        this.innerusername = response.data.data.name
       }
     }).catch((error) => {
       console.log(error)
@@ -52,7 +59,7 @@ export default {
   },
   methods: {
     clickUserName () {
-      if (this.username === '请登录') {
+      if (this.innerusername === '请登录') {
         this.$router.push('/main/login')
       }
     },
