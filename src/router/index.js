@@ -9,6 +9,7 @@ import Notice from '@/components/content/Notice'
 import NewNotice from '@/components/content/NewNotice'
 import Newtable from '@/components/content/Newtable'
 import Mytable from '@/components/content/Mytable'
+import Usercenter from '@/components/content/Usercenter'
 import Test from '@/components/Test'
 
 Vue.use(Router)
@@ -30,6 +31,11 @@ export default new Router({
       name: 'Main',
       component: Main,
       children: [
+        {
+          path: 'usercenter',
+          name: 'Usercenter',
+          component: Usercenter
+        },
         {
           path: 'login',
           name: 'Login',

@@ -18,7 +18,7 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人中心</el-dropdown-item>
+          <el-dropdown-item><p @click="gotoUsercenter()">个人中心</p></el-dropdown-item>
           <el-dropdown-item>注销</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -58,6 +58,10 @@ export default {
     })
   },
   methods: {
+    gotoUsercenter () {
+      alert('1')
+      this.$router.push('/main/usercenter')
+    },
     clickUserName () {
       if (this.innerusername === '请登录') {
         this.$router.push('/main/login')
