@@ -4,7 +4,7 @@
       <el-button slot="append" icon="el-icon-search"></el-button>
     </el-input>
     <el-button @click="newnotice">新建公告</el-button>
-    <el-collapse>
+    <el-collapse v-model="activeNames" @change="handleChange">
       <el-collapse-item v-for="notice in notices" :name="notice.noticeid" :key="notice.noticeid">
         <template slot="title">
             <div class="el-notice-item-title">{{ notice.notice }}</div>
@@ -39,11 +39,14 @@ export default {
   name: 'Notice',
   data () {
     return {
-      message: 'this is notice.',
+      activeNames: [],
       notices: []
     }
   },
   methods: {
+    handleChange (val) {
+      console.log(val)
+    },
     download (md5) {
       var a = document.createElement('a')
       a.href = URLS.fileserver + '/download/downloadFile?md5=' + md5

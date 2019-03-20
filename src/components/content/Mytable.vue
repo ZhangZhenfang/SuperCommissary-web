@@ -1,6 +1,6 @@
 <template>
   <div id="mytable-div">
-    <el-collapse>
+    <el-collapse v-model="activeNames" @change="handleChange">
       <el-collapse-item v-for="table in tables" :name="table.excelid" :key="table.excelid">
         <template slot="title">
           <div id="mytable-title-left-div">
@@ -27,11 +27,15 @@ export default {
   components: { Table },
   data () {
     return {
+      activeNames: [],
       tables: [
       ]
     }
   },
   methods: {
+    handleChange (val) {
+      console.log(val)
+    },
     renderTable (that, table) {
       document.getElementById('table1').innerHTML = table.head
     },
