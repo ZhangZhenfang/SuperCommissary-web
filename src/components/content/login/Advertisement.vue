@@ -52,7 +52,7 @@ export default {
           title: '学校选派4名干部赴万州区担任贫困村第一书记',
           linkUrl: 'http://www.cqut.edu.cn/info/1008/18569.htm'
         }
-      ],
+      ]
     }
   }
 }
