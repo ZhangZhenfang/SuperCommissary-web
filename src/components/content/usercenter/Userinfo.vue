@@ -130,7 +130,7 @@ export default {
 #userinfo-div {
   padding-top: 30px;
   padding-left: 30px;
-  border: 1px solid yellowgreen;
+  /* border: 1px solid yellowgreen; */
 }
 .el-input {
   width: 500px;

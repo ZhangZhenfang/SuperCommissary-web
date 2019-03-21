@@ -86,14 +86,12 @@ export default {
   },
   methods: {
     downloadFile (md5) {
-      console.log(md5)
       window.location.href = URLS.fileserver + '/download/downloadFile?md5=' + md5
     },
     getMyFiles () {
       this.axios.post(URLS.dochubapi + '/files/getMyFiles').then((response) => {
         if (response.data.status === '1') {
           this.myfiles = response.data.data
-          console.log(this.myfiles)
         }
       })
     },
@@ -124,7 +122,6 @@ export default {
     handleChange (val) {
     },
     getNoticesFromFriend () {
-      console.log(URLS['dochubapi'])
       this.axios.post(
         URLS.dochubapi + '/notices/getNoticesFromFriends',
         this.qs.stringify(),
@@ -164,13 +161,13 @@ export default {
   float: left;
   width: 40%;
   height: 900px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 #upfile-right-top {
   width: 99%;
   height: 15%;
   float: left;
-  border: 1px solid rgb(69, 37, 209);
+  /* border: 1px solid rgb(69, 37, 209); */
 }
 #upfile-right-top-inner {
   margin-top: 15px;
@@ -185,7 +182,7 @@ export default {
   width: 99%;
   height: 60%;
   float: left;
-  border: 1px solid rgb(187, 26, 26);
+  /* border: 1px solid rgb(187, 26, 26); */
 }
 .notice-info-div {
   background-color: rgb(236, 236, 236);

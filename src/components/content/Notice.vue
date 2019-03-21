@@ -129,7 +129,7 @@ export default {
   margin: 0 auto;
 }
 .el-notice-item-div {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 95%;
   background-color: whitesmoke;
   padding-top: 20px;

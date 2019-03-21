@@ -6,7 +6,6 @@
           <p>{{ item.title }}</p>
           <img :src="item.url">
         </a>
-        <!-- <h3>{{ item }}</h3> -->
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -61,12 +60,8 @@ export default {
 
 <style>
 #advertisement-div {
-  padding-top: 10px;
-  width: 60%;
-  height: 590px;
-  float: left;
-  text-align: center;
-  border: 1px solid red;
+  height: 100%;
+  width: 100%;
 }
 #advertisement-div a:hover {
   color: rgb(25, 0, 255);
@@ -79,6 +74,7 @@ export default {
 #advertisement-div p {
   height: 15px;
 }
+
 #advertisement-div img {
   height: 480px;
   width: 96%;

@@ -44,7 +44,7 @@ export default {
   margin: 0 auto;
   height: 100%;
   width: 95%;
-  border: 1px solid green;
+  /* border: 1px solid green; */
 }
 #main-div-menu {
   width: 100%;
@@ -55,13 +55,13 @@ export default {
   width: 100%;
   float: left;
   margin-top: 30px;
-  min-height: 750px;
+  min-height: 720px;
 }
 #main-div-footer {
   margin-top: 40px;
   width: 100%;
   float: left;
-  line-height: 85px;
-  height: 85px;
+  line-height: 86px;
+  height: 86px;
 }
 </style>

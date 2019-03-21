@@ -59,9 +59,9 @@ export default {
 }
 .table td, .table th {
   font-size:1em;
-  border:1px solid #000000;
   padding:2px 7px 2px 7px;
   height: 40px;
+  /* border:1px solid #000000; */
 }
 .table input {
   text-align: center;

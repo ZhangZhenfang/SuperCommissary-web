@@ -1,6 +1,7 @@
 <template>
   <div id="uptable-div">
     <div id="uptable-advertisement-div">
+      <Advertisement></Advertisement>
     </div>
     <div id="uptable-form-div">
       <el-form ref="ruleForm" :model="form" :rules="rules" label-width="80px">
@@ -41,10 +42,12 @@
 </template>
 
 <script>
+import Advertisement from './login/Advertisement'
 import {formatDate} from '../../util/date.js'
 import URLS from '../../json/urls.json'
 export default {
   name: 'Newtable',
+  components: { Advertisement },
   data () {
     return {
       form: {
@@ -150,6 +153,6 @@ export default {
   width: 55%;
   height: 600px;;
   float: left;
-  border: 1px solid pink;
+  /* border: 1px solid pink; */
 }
 </style>

@@ -38,15 +38,17 @@ export default {
   height: 25px;
 }
 #footer-div {
-  height: 100%;
+  height: 86px;
   width: 100%;
-  background-color: azure;
-  border: 1px solid black;
+  background-color: rgb(224, 224, 224);
+  /* border: 1px solid black; */
 }
 .copyrigth {
+  padding-top: 15px;
+  height: 86px;
   text-align: center;
   font-size: 16px;
-  line-height: 32px;
+  line-height: 35px;
   color: #666697;
 }
 </style>

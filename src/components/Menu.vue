@@ -20,7 +20,7 @@
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item><p @click="gotoUsercenter()">个人中心</p></el-dropdown-item>
-          <el-dropdown-item>注销</el-dropdown-item>
+          <el-dropdown-item><p @click="logout()">注销</p></el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import UserApi from '../api/UserApi'
 export default {
   name: 'Menu',
   props: ['menuActiveIndex', 'username'],
@@ -56,6 +57,10 @@ export default {
     })
   },
   methods: {
+    logout () {
+      /** 此处传this给过去有些不妥 */
+      UserApi.logout(this)
+    },
     gotoUsercenter () {
       this.$router.push('/main/usercenter')
     },
@@ -108,7 +113,7 @@ export default {
     float: left;
     height: 60px;
     padding: 30px 0px 0px 0px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
   }
   .el-dropdown-link {
     cursor: pointer;

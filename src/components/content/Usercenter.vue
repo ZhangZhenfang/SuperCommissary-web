@@ -79,12 +79,12 @@ export default {
   width: 20%;
   height: 100%;
   float: left;
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
 }
 #usercenter-right-div {
   width: 79%;
   height: 100%;
   float: left;
-  border: 1px solid purple;
+  /* border: 1px solid purple; */
 }
 </style>

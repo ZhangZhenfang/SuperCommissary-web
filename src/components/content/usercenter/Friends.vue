@@ -7,24 +7,24 @@
     </div>
     <div id="friendstable-div">
       <el-table :data="friends" border style="width: 100%">
-        <el-table-column prop="studentnumber" label="学号" width="120">
+        <el-table-column prop="studentnumber" label="学号" width="130">
         </el-table-column>
-        <el-table-column prop="name" label="姓名" width="80">
+        <el-table-column prop="name" label="姓名" width="90">
         </el-table-column>
-        <el-table-column prop="sex" label="性别" width="50">
+        <el-table-column prop="sex" label="性别" width="60">
           <!-- 插槽 -->
           <template slot-scope="scope">
             <!-- 过滤性别数据 -->
             {{scope.row.sex | sexfilter}}
           </template>
         </el-table-column>
-        <el-table-column prop="school" label="学校" width="150">
+        <el-table-column prop="school" label="学校" width="160">
         </el-table-column>
-        <el-table-column prop="institute" label="学院" width="190">
+        <el-table-column prop="institute" label="学院" width="200">
         </el-table-column>
         <el-table-column prop="major" label="专业" width="200">
         </el-table-column>
-        <el-table-column fixed="right" label="操作" width="50">
+        <el-table-column label="操作" width="50">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="mini">取关</el-button>
           </template>
