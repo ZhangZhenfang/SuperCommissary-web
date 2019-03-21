@@ -5,8 +5,8 @@ export default {
     blankMsg: '请输入密码'
   },
   name: {
-    reg: /^([u4e00-u9fa5·s]{1,20}|[a-zA-Z.s]{1,20})$/,
-    msg: '名字不符合规范',
+    reg: /^[a-zA-Z\u4e00-\u9fa5]{2,16}$/,
+    msg: '名字必须是2-16个中文或英文字符',
     blankMsg: '请输入姓名'
   },
   studentnumber: {
