@@ -46,7 +46,6 @@ export default {
   height: 590px;
   float: left;
   text-align: center;
-  /* border: 1px solid red; */
 }
 #login-div {
   height: 600px;
