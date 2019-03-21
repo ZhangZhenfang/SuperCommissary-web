@@ -1,5 +1,6 @@
 <template>
   <div id="table-div">
+    <!-- v-html指令，把tableNode渲染为html，否则显示字符串 -->
     <div v-html="tableNode" :ref="'table-' + tableid">
     </div>
     <div id="table-op-div">

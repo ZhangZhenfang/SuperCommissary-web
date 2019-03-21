@@ -30,7 +30,7 @@ export default new Router({
       path: '/main',
       name: 'Main',
       component: Main,
-      children: [
+      children: [// 子路由
         {
           path: 'usercenter',
           name: 'Usercenter',

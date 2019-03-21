@@ -12,6 +12,7 @@
           </div>
         </template>
         <div id="mytable-table-div">
+          <!-- 通过标签里的属性传递参数给子组件 -->
           <Table :tablehtml="table.head" :tableid="table.excelid" :mysubmit="table.mysubmit" :recordid="table.mysubmit == null ? null : table.mysubmit.recordid"></Table>
         </div>
       </el-collapse-item>
@@ -40,7 +41,7 @@ export default {
       document.getElementById('table1').innerHTML = table.head
     },
     getExcelList () {
-      this.axios.post(URLS.dochubapi + '/excels/getExcelFromFriends').then((res) => {
+      this.axios.get(URLS.dochubapi + '/excels/getExcelFromFriends').then((res) => {
         if (res.data.status === '1') {
           this.tables = res.data.data
         } else {

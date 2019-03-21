@@ -2,6 +2,12 @@
   <div id="upfile-div" ref="upfile-div">
     <div id="upfile-left">
       <el-collapse @change="handleChange">
+        <!--
+          为什么使用v-for指令的时候必须添加唯一的key?
+          使用v-for更新已渲染的元素列表时,默认用就地复用策略;列表数据修改的时候,他会根据key值去判断某个值是否修改,
+          如果修改,则重新渲染这一项,否则复用之前的元素;
+          https://segmentfault.com/a/1190000013810844
+        -->
         <el-collapse-item v-for="notice in notices" :name="notice.noticeid" :key="notice.noticeid">
           <template slot="title"><p class="el-collpase-item-title">{{ notice.notice }}</p></template>
           <el-form label-width="80px">

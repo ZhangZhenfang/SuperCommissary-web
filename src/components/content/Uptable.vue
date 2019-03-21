@@ -50,7 +50,9 @@ export default {
       /**
        * 一种解决vue不能监听到深层次的对象属性改变所引起的不能正确及时渲染的方法，
        * Vue最独特的特性之一是非侵入性的响应式系统。数据模型仅仅是普通的JavaScript对象。当你修改他们时，视图会进行更新。
-       * 受现代 JavaScript 的限制 (而且 Object.observe 也已经被废弃)，Vue 不能检测到对象属性的添加或删除。由于 Vue 会在初始化实例时对属性执行 getter/setter 转化过程，所以属性必须在 data 对象上存在才能让 Vue 转换它，这样才能让它是响应的。
+       * 受现代 JavaScript 的限制 (而且 Object.observe 也已经被废弃)，Vue 不能检测到对象属性的添加或删除。
+       * 由于 Vue 会在初始化实例时对属性执行 getter/setter 转化过程，所以属性必须在 data 对象上存在才能让 Vue 转换它，
+       * 这样才能让它是响应的。
        */
       this.vue.set(this.show, index, true)
     },

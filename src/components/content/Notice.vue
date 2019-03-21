@@ -23,6 +23,7 @@
             </el-table-column>
             <el-table-column prop="filename" label="提交文件">
               <template slot-scope="scope">
+                <!-- 注意@click的值加不加括号的问题 -->
                 <a @click="download(scope.row.md5)">{{ scope.row.filename }}</a>
               </template>
             </el-table-column>

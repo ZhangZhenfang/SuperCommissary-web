@@ -14,6 +14,7 @@
     <div id="top-right-div" class="top-div">
       <el-dropdown>
         <span class="el-dropdown-link">
+          <!-- @click的值加不加括号问题 -->
           <span @click="clickUserName()">{{ innerusername }}</span>
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
@@ -38,15 +39,12 @@ export default {
   /** 监听父组件'username'改动后修改自己的属性值 */
   watch: {
     username: function (newV, oldV) {
-      console.log(newV, oldV)
+      // console.log(newV, oldV)
       this.innerusername = newV
     }
   },
   mounted () {
-    this.axios.get(
-      'http://www.the15373.com/users/getUserinfo'
-    ).then((response) => {
-      console.log(response)
+    this.axios.get(this.URLS.dochubapi + '/users/getUserinfo').then((response) => {
       if (response.data.status === 0) {
         this.innerusername = '请登录'
         this.$router.push('/main/login')
@@ -59,7 +57,6 @@ export default {
   },
   methods: {
     gotoUsercenter () {
-      alert('1')
       this.$router.push('/main/usercenter')
     },
     clickUserName () {
@@ -68,7 +65,7 @@ export default {
       }
     },
     handleSelect (key, keyPath) {
-      console.log(key)
+      // console.log(key)
       switch (key) {
         case '1':
           this.$router.push('/main/upfile')

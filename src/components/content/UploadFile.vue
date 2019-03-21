@@ -1,6 +1,8 @@
 <template>
   <div id="uploadfile-div">
-    <el-upload :onChange="handleChange" :auto-upload="false" class="upload-demo" action="action" :on-preview="handlePreview" :on-remove="handleRemove" :before-remove="beforeRemove" multiple :limit="1" :on-exceed="handleExceed" :file-list="fileList">
+    <el-upload :onChange="handleChange" :auto-upload="false" class="upload-demo" action="action"
+      :on-preview="handlePreview" :on-remove="handleRemove" :before-remove="beforeRemove" multiple
+      :limit="1" :on-exceed="handleExceed" :file-list="fileList">
       <el-button slot="trigger" size="mini" type="primary" v-bind:disabled="btnSwitcher">选择文件</el-button>
       <el-button @click="handleUploadFile" size="mini" type="primary" v-bind:disabled="btnSwitcher">提交文件</el-button>
     </el-upload>
@@ -93,6 +95,10 @@ export default {
     },
     /**
      * 上传文件，闭包问题
+     * 上传文件函数里面有几个嵌套函数，在嵌套函数里面用到了上传文件函数的数据（包括变量和函数都有用到）
+     * 闭包产生的条件：
+     * 函数嵌套
+     * 内部函数引用了外部函数的数据
      */
     upFile (file, data, url, updateProgress, success, error) {
       var totalLoaded = 0

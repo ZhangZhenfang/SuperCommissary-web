@@ -15,10 +15,14 @@
       <div id="login-form-div">
         <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
           <el-form-item label="账 号" prop="account">
-            <el-input prefix-icon="el-icon-date" size="large" minlength="100" autofocus type="text" v-model="ruleForm2.account" autocomplete="off"></el-input>
+            <el-input prefix-icon="el-icon-date" size="large" minlength="100" autofocus type="text" v-model="ruleForm2.account"
+              autocomplete="off">
+            </el-input>
           </el-form-item>
           <el-form-item label="密 码" prop="password">
-            <el-input prefix-icon="el-icon-date" size="large" minlength="100" type="password" v-model="ruleForm2.password" autocomplete="off"></el-input>
+            <el-input prefix-icon="el-icon-date" size="large" minlength="100" type="password" v-model="ruleForm2.password"
+              autocomplete="off">
+            </el-input>
           </el-form-item>
           <el-form-item>
             <el-button size="large" type="primary" @click="submitForm('ruleForm2')">登录</el-button>

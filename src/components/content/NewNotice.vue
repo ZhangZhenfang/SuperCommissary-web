@@ -31,6 +31,7 @@
         <el-input type="textarea" v-model="form.desc" placeholder="随便说点什么吧"></el-input>
       </el-form-item>
       <el-form-item>
+        <!-- @click的值加不加括号的问题 -->
         <el-button type="primary" @click="onSubmit">立即新建</el-button>
         <el-button @click="goback">返回我的公告</el-button>
       </el-form-item>
