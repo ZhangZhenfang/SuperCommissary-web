@@ -6,7 +6,10 @@
     <div id="uptable-form-div">
       <el-form ref="ruleForm" :model="form" :rules="rules" label-width="80px">
       <el-form-item label="Excel文件" prop="name">
-        <el-input ref="excel-file-input" v-model="form.name" type="file" />
+        <el-tooltip class="item" effect="light" placement="top-start">
+          <div style="font-size:18px;" slot="content">只能解析.xls或者.xlsx文件，表格第一行不能为空行，否则解析错误</div>
+          <el-input ref="excel-file-input" v-model="form.name" type="file" />
+        </el-tooltip>
       </el-form-item>
       <el-form-item prop="startdate" label="开始时间">
         <el-col :span="11">

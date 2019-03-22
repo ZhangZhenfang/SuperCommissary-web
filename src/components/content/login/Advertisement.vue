@@ -51,6 +51,12 @@ export default {
           url: 'http://www.cqut.edu.cn//__local/8/02/65/FA388D12D261F87C2F951CA7181_5003CCD5_340CE.jpg',
           title: '学校选派4名干部赴万州区担任贫困村第一书记',
           linkUrl: 'http://www.cqut.edu.cn/info/1008/18569.htm'
+        },
+        {
+          id: 7,
+          url: 'http://www.the15373.com/img/1553183037.png',
+          title: '阿里云发红包了',
+          linkUrl: 'https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=1nps0pmx'
         }
       ]
     }
