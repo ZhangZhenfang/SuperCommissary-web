@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import URLS from '../../json/urls.json'
 export default {
   name: 'Exceltotable',
   props: ['excelid'],
@@ -21,7 +20,7 @@ export default {
   },
   methods: {
     excelToTable () {
-      this.axios.post(URLS.dochubapi + '/excels/excelToTable', this.qs.stringify({ excelId: this.excelid })).then((response) => {
+      this.axios.post(this.URLS.dochubapi + '/excels/excelToTable', this.qs.stringify({ excelId: this.excelid })).then((response) => {
         if (response.data.status === '1') {
           this.exceltotablehtml = response.data.data
           console.log(response.data)

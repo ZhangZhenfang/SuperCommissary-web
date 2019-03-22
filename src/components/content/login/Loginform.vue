@@ -154,8 +154,7 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.axios.get(
-            this.URLS.dochubapi + '/users/auth', { params: this.loginForm }).then((response) => {
+          this.axios.get(this.URLS.dochubapi + '/users/auth', { params: this.loginForm }).then((response) => {
             console.log(response)
             if (response.data.status !== '1' && response.data.status !== '2') {
               this.loginStatus = '用户名或密码错误'

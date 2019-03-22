@@ -54,8 +54,6 @@
 
 <script>
 import UploadFile from './UploadFile.vue'
-import URLS from '../../json/urls.json'
-
 export default {
   name: 'Upfile',
   components: { UploadFile },
@@ -86,10 +84,10 @@ export default {
   },
   methods: {
     downloadFile (md5) {
-      window.location.href = URLS.fileserver + '/download/downloadFile?md5=' + md5
+      window.location.href = this.URLS.fileserver + '/download/downloadFile?md5=' + md5
     },
     getMyFiles () {
-      this.axios.post(URLS.dochubapi + '/files/getMyFiles').then((response) => {
+      this.axios.post(this.URLS.dochubapi + '/files/getMyFiles').then((response) => {
         if (response.data.status === '1') {
           this.myfiles = response.data.data
         }
@@ -113,7 +111,7 @@ export default {
     download (notice) {
       if (notice.mysubmt != null) {
         var a = document.createElement('a')
-        a.href = URLS.fileserver + '/download/downloadFile?md5=' + notice.mysubmt.md5
+        a.href = this.URLS.fileserver + '/download/downloadFile?md5=' + notice.mysubmt.md5
         this.$refs['upfile-div'].append(a)
         a.click()
         a.remove()
@@ -122,8 +120,7 @@ export default {
     handleChange (val) {
     },
     getNoticesFromFriend () {
-      this.axios.post(
-        URLS.dochubapi + '/notices/getNoticesFromFriends',
+      this.axios.post(this.URLS.dochubapi + '/notices/getNoticesFromFriends',
         this.qs.stringify(),
         {
           headers: {

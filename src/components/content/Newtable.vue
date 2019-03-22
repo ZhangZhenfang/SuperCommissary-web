@@ -47,7 +47,6 @@
 <script>
 import Advertisement from './login/Advertisement'
 import {formatDate} from '../../util/date.js'
-import URLS from '../../json/urls.json'
 export default {
   name: 'Newtable',
   components: { Advertisement },
@@ -122,7 +121,7 @@ export default {
       return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
     },
     newExcel (data) {
-      this.axios.post(URLS.dochubapi + '/excels/uploadExcel', data).then((res) => {
+      this.axios.post(this.URLS.dochubapi + '/excels/uploadExcel', data).then((res) => {
         if (res.data.status === '1') {
           this.$refs['ruleForm'].resetFields()
           this.$message('上传成功！')

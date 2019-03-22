@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import URLS from '../../json/urls.json'
 export default {
   name: 'Notice',
   data () {
@@ -50,14 +49,13 @@ export default {
     },
     download (md5) {
       var a = document.createElement('a')
-      a.href = URLS.fileserver + '/download/downloadFile?md5=' + md5
+      a.href = this.URLS.fileserver + '/download/downloadFile?md5=' + md5
       this.$refs['notice-div'].append(a)
       a.click()
       a.remove()
     },
     getMyNotice () {
-      this.axios.post(
-        URLS.dochubapi + '/notices/getMyNotice',
+      this.axios.post(this.URLS.dochubapi + '/notices/getMyNotice',
         this.qs.stringify(),
         {
           headers: {
@@ -76,7 +74,7 @@ export default {
       this.$router.push('/main/notice/newnotice')
     },
     downloadNotice (userid, noticeid, name) {
-      window.location.href = URLS.fileserver + '/download/downloadZip?path=noticedata/' + userid + '/' + noticeid + '&name=' + name
+      window.location.href = this.URLS.fileserver + '/download/downloadZip?path=noticedata/' + userid + '/' + noticeid + '&name=' + name
     },
     deleteNotice (noticeid) {
       this.$confirm('此操作将失去对该公告下的所有文件的控制权, 是否继续?', '提示', {

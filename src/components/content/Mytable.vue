@@ -22,7 +22,6 @@
 
 <script>
 import Table from './Table.vue'
-import URLS from '../../json/urls.json'
 export default {
   name: 'Mytable',
   components: { Table },
@@ -41,7 +40,7 @@ export default {
       document.getElementById('table1').innerHTML = table.head
     },
     getExcelList () {
-      this.axios.get(URLS.dochubapi + '/excels/getExcelFromFriends').then((res) => {
+      this.axios.get(this.URLS.dochubapi + '/excels/getExcelFromFriends').then((res) => {
         if (res.data.status === '1') {
           this.tables = res.data.data
         } else {

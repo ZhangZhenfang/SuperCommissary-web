@@ -44,7 +44,6 @@
 <script>
 import Advertisement from './login/Advertisement'
 import {formatDate} from '../../util/date.js'
-import URLS from '../../json/urls.json'
 export default {
   name: 'NewNotice',
   components: { Advertisement },
@@ -107,7 +106,7 @@ export default {
       return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
     },
     newNotice (data) {
-      this.axios.post(URLS.dochubapi + '/notices/newNotice', this.qs.stringify(data)).then((res) => {
+      this.axios.post(this.URLS.dochubapi + '/notices/newNotice', this.qs.stringify(data)).then((res) => {
         if (res.data.status === '1') {
           console.log('success')
           this.$message('新建公告成功！')

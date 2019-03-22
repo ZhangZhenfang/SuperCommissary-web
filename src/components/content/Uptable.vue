@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import URLS from '../../json/urls.json'
 import Exceltotable from './Exceltotable'
 
 export default {
@@ -60,8 +59,7 @@ export default {
       console.log(val)
     },
     getMyExcel () {
-      this.axios.post(
-        URLS.dochubapi + '/excels/getMyExcels',
+      this.axios.post(this.URLS.dochubapi + '/excels/getMyExcels',
         this.qs.stringify(), {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -80,7 +78,7 @@ export default {
     },
     downloadExcel (excelid) {
       if (excelid !== null && excelid !== undefined) {
-        window.location.href = URLS.dochubapi + '/excels/downloadExcel?excelid=' + excelid
+        window.location.href = this.URLS.dochubapi + '/excels/downloadExcel?excelid=' + excelid
       } else {
         this.$message('下载失败！')
       }
@@ -91,7 +89,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.axios.post(URL.dochubapi + '/excels/deleteExcel', this.qs.stringify({
+        this.axios.post(this.URLS.dochubapi + '/excels/deleteExcel', this.qs.stringify({
           excelid: excelid
         })).then((res) => {
           if (res.data.status === '1') {
