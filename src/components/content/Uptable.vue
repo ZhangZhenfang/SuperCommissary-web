@@ -90,7 +90,7 @@ export default {
         type: 'warning'
       }).then(() => {
         this.axios.post(this.URLS.dochubapi + '/excels/deleteExcel', this.qs.stringify({
-          excelid: excelid
+          excelId: excelid
         })).then((res) => {
           if (res.data.status === '1') {
             console.log('success')
