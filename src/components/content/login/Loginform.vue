@@ -26,7 +26,7 @@
       </el-tab-pane>
       <el-tab-pane label="用户注册">
         <div id="login-form-regist-div">
-          <el-form :model="registForm" :rules="registFormRules" ref="registForm" label-width="100px">
+          <el-form :model="registForm" :rules="registFormRules" ref="registForm" label-width="120px">
             <el-form-item label="学号" prop="studentnumber">
               <el-input v-model="registForm.studentnumber"></el-input>
             </el-form-item>
@@ -34,10 +34,10 @@
               <el-input v-model="registForm.name"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
-              <el-input v-model="registForm.password"></el-input>
+              <el-input type="password" v-model="registForm.password"></el-input>
             </el-form-item>
             <el-form-item label="确认密码" prop="checkpassword">
-              <el-input v-model="registForm.checkpassword"></el-input>
+              <el-input type="password" v-model="registForm.checkpassword"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="regist('registForm')">立即注册</el-button>

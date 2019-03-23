@@ -60,22 +60,7 @@ export default {
   data () {
     return {
       activeNames: ['0'],
-      notices: [
-        {
-          noticeid: 1,
-          notice: 'asdf',
-          user: {
-            name: 'a'
-          }
-        },
-        {
-          noticeid: 2,
-          notice: 'asdfjhgf',
-          user: {
-            name: 'b'
-          }
-        }
-      ],
+      notices: [],
       select: '1',
       condition: '',
       myfiles: [
@@ -99,13 +84,21 @@ export default {
         return
       }
       if (code === '1') {
-        console.log(1, this.condition)
+        if (this.condition === '') {
+          this.$message('请输入查询条件')
+        } else {
+          this.getNoticesByNoticeName(this.condition)
+        }
       } else if (code === '2') {
-        console.log(2, this.condition)
+        if (this.condition === '') {
+          this.$message('请输入查询条件')
+        } else {
+          this.getNoticesByUserName(this.condition)
+        }
       } else if (code === '3') {
-        console.log(3)
+        this.getNoticesBySubmitted(1)
       } else if (code === '4') {
-        console.log(4)
+        this.getNoticesBySubmitted(0)
       }
     },
     download (notice) {
@@ -119,15 +112,45 @@ export default {
     },
     handleChange (val) {
     },
-    getNoticesFromFriend () {
-      this.axios.post(this.URLS.dochubapi + '/notices/getNoticesFromFriends',
-        this.qs.stringify(),
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
+    getNoticesByNoticeName (name) {
+      this.axios.post(this.URLS.dochubapi + '/notices/getNoticesByNoticeName', this.qs.stringify({
+        noticeName: name
+      })).then((response) => {
+        if (response.data.status === '1') {
+          this.notices = response.data.data
+        } else {
+          this.$message('查询失败')
         }
-      ).then(function (res) {
+      })
+    },
+    getNoticesByUserName (name) {
+      this.axios.post(this.URLS.dochubapi + '/notices/getNoticesByUserName', this.qs.stringify({
+        userName: name
+      })).then((response) => {
+        if (response.data.status === '1') {
+          this.notices = response.data.data
+        } else {
+          this.$message('查询失败')
+        }
+      })
+    },
+    getNoticesBySubmitted (type) {
+      this.axios.post(this.URLS.dochubapi + '/notices/getNoticesBySubmitted', this.qs.stringify({
+        type: type
+      })).then((response) => {
+        if (response.data.status === '1') {
+          this.notices = response.data.data
+        } else {
+          this.$message('查询失败')
+        }
+      })
+    },
+    getNoticesFromFriend () {
+      this.axios.post(this.URLS.dochubapi + '/notices/getNoticesFromFriends', this.qs.stringify(),{
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(function (res) {
         this.notices = res.data.data
       }.bind(this)).catch(function (err) {
         if (err.response) {
