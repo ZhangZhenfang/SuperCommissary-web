@@ -146,7 +146,7 @@ export default {
       })
     },
     getNoticesFromFriend () {
-      this.axios.post(this.URLS.dochubapi + '/notices/getNoticesFromFriends', this.qs.stringify(),{
+      this.axios.post(this.URLS.dochubapi + '/notices/getNoticesFromFriends', this.qs.stringify(), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }

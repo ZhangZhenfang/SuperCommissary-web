@@ -52,6 +52,7 @@
 
 <script>
 import REGS from '../../../common/regs.js'
+import { setTimeout } from 'timers';
 export default {
   name: 'Loginform',
   props: ['username', 'updateUsername'],
@@ -140,7 +141,22 @@ export default {
           this.registForm.account = this.registForm.studentnumber
           this.axios.post(this.URLS.dochubapi + '/users/regist', this.qs.stringify(this.registForm)).then((response) => {
             if (response.data.status === '1') {
-              this.$message('注册成功')
+              this.$message('注册成功，已自动登录')
+              this.loginForm.account = this.registForm.account
+              this.loginForm.password = this.registForm.password
+              this.submitForm('loginForm')
+              var that = this
+              setTimeout(function () {
+                that.axios.post(that.URLS.dochubapi + '/relations/addRelationship', that.qs.stringify({
+                  account: '11503070303'
+                })).then((response) => {
+                  if (response.data.status === '1') {
+                    that.$message('已关注用户11503070303，可在个人中心我的关注页面取关')
+                  } else {
+                    // this.$message('关注失败,' + response.data.errors)
+                  }
+                })
+              }, 1000)
             } else {
               this.$message(response.data.errors)
             }
