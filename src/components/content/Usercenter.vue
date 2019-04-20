@@ -17,6 +17,10 @@
           <span slot="title">修改密码</span>
         </el-menu-item>
         <el-menu-item index="4" @click="select(4)">
+          <i class="el-icon-setting"></i>
+          <span slot="title">人脸密码</span>
+        </el-menu-item>
+        <el-menu-item index="5" @click="select(5)">
           <i class="el-icon-close"></i>
           <span slot="title">注销登录</span>
         </el-menu-item>
@@ -36,9 +40,10 @@
 import Userinfo from './usercenter/Userinfo'
 import Updatepassword from './usercenter/Updatepassword'
 import Friends from './usercenter/Friends'
+import FaceImage from './usercenter/FaceImage'
 export default {
   name: 'Usercenter',
-  components: { Userinfo, Updatepassword, Friends },
+  components: { Userinfo, Updatepassword, Friends, FaceImage },
   data () {
     return {
       currentTabComponent: Userinfo
@@ -54,6 +59,8 @@ export default {
       } else if (index === 3) {
         this.currentTabComponent = Updatepassword
       } else if (index === 4) {
+        this.currentTabComponent = FaceImage
+      } else if (index === 5) {
         this.axios.get(this.URLS.dochubapi + '/users/logout').then((response) => {
           if (response.data.status === '1') {
             this.$message('注销成功，即将跳转到登录页面')

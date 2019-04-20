@@ -20,8 +20,12 @@
             <el-form-item>
               <el-button size="large" type="primary" @click="submitForm('loginForm')">登录</el-button>
               <el-button size="large" type="primary" @click="resetForm('loginForm')">重置</el-button>
+              <el-button size="large" type="primary" @click="verifyface('loginForm')">人脸登录</el-button>
             </el-form-item>
           </el-form>
+          <el-dialog title="验证人脸" :visible.sync="videodialogVisible" width="400px" :before-close="handleCloseVideo">
+            <VerifyVideo :stream="videoStream" :username="loginForm.account" v-on:handleResponse="handleResponse"></VerifyVideo>
+        </el-dialog>
         </div>
       </el-tab-pane>
       <el-tab-pane label="用户注册">
@@ -52,8 +56,10 @@
 
 <script>
 import REGS from '../../../common/regs.js'
-import { setTimeout } from 'timers';
+import { setTimeout } from 'timers'
+import VerifyVideo from './VerifyVideo.vue'
 export default {
+  components: { VerifyVideo },
   name: 'Loginform',
   props: ['username', 'updateUsername'],
   data () {
@@ -92,6 +98,8 @@ export default {
       }
     }
     return {
+      videoStream: {},
+      videodialogVisible: false,
       loginForm: {
         account: '',
         password: ''
@@ -171,15 +179,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.axios.get(this.URLS.dochubapi + '/users/auth', { params: this.loginForm }).then((response) => {
-            console.log(response)
-            if (response.data.status !== '1' && response.data.status !== '2') {
-              this.loginStatus = '用户名或密码错误'
-            } else {
-              this.loginStatus = ''
-              /** 修改父组件的值 */
-              this.$emit('updateUsername', response.data.name)
-              this.$router.push('/main/upfile')
-            }
+            this.handleResponse(response)
           }).catch((error) => {
             console.log(error)
           })
@@ -189,9 +189,34 @@ export default {
         }
       })
     },
+    handleResponse (response) {
+      console.log(response)
+      if (response.data.status !== '1' && response.data.status !== '2') {
+        this.loginStatus = '用户名或密码错误'
+      } else {
+        this.handleCloseVideo()
+        this.loginStatus = ''
+        /** 修改父组件的值 */
+        this.$emit('updateUsername', response.data.name)
+        this.$router.push('/main/upfile')
+      }
+    },
     resetForm (formName) {
       this.$refs[formName].resetFields()
       this.$refs[formName].$children[0].$children[0].focus()
+    },
+    verifyface (formName) {
+      this.videodialogVisible = true
+      navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
+        this.videoStream = stream
+      })
+    },
+    handleCloseVideo (done) {
+      if (this.videoStream != null) {
+        this.videoStream.getTracks()[0].stop()
+      }
+      this.videoStream = null
+      this.videodialogVisible = false
     }
   },
   mounted () {
