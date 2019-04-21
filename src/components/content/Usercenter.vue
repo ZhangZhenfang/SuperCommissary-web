@@ -78,9 +78,12 @@ export default {
 
 <style>
 #usercenter-div {
-  height: 600px;
+  /* height: 600px; */
   width: 90%;
-  margin: 30px auto;
+  margin: 0px auto;
+  width: 100%;
+  float: left;
+  min-height: 600px;
 }
 #usercenter-left-div {
   width: 20%;

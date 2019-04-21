@@ -206,10 +206,15 @@ export default {
       this.$refs[formName].$children[0].$children[0].focus()
     },
     verifyface (formName) {
-      this.videodialogVisible = true
-      navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
-        this.videoStream = stream
-      })
+      console.log(this.loginForm)
+      if (this.loginForm.account != '') {
+        this.videodialogVisible = true
+        navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
+          this.videoStream = stream
+        })
+      } else {
+        this.$message('请先输入账号')
+      }
     },
     handleCloseVideo (done) {
       if (this.videoStream != null) {

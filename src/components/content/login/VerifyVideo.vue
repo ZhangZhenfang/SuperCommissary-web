@@ -50,7 +50,9 @@ export default {
         if (response.data.status === '1' || response.data.status === '2') {
           this.$emit('handleResponse', response)
         } else {
-          setTimeout(this.snapAndUpload, 500)
+          if (!this.loginCompleted) {
+            setTimeout(this.snapAndUpload, 200)
+          }
         }
       })
     },
@@ -74,10 +76,12 @@ export default {
     'stream': function (val) {
       if (val === null) {
         clearInterval(this.interveal)
+        this.loginCompleted = true
       } else {
         this.video.srcObject = this.stream
         this.video.play()
-        setTimeout(this.snapAndUpload, 500)
+        this.loginCompleted = false
+        setTimeout(this.snapAndUpload, 200)
         // this.interveal = setInterval(this.snapAndUpload, 300)
       }
     }
