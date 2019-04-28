@@ -42,7 +42,7 @@ export default {
       var filedata = new FormData()
       filedata.append('data', this.currentPic)
       filedata.append('userName', this.username)
-      this.axios.post('http://localhost:8080/face/addFace', filedata).then((response) => {
+      this.axios.post(this.URLS.faceserver + '/face/addFace', filedata).then((response) => {
         if (response.data.status === 1) {
           this.faces.push(response.data.data)
           this.$message(response.data.message)
@@ -64,8 +64,8 @@ export default {
       this.currentPic = file
       var formData = new FormData()
       formData.append('data', file)
-      this.axios.post('http://localhost:8080/model/detect', formData).then(response => {
-        this.img.src = 'data:image/png;base64,' + response.data
+      this.axios.post(this.URLS.faceserver + '/model/detect', formData).then(response => {
+        this.img.src = 'data:image/jpg;base64,' + response.data
       })
     },
     takecapture () {
@@ -75,7 +75,7 @@ export default {
       this.showImg = true
       if (this.streaming) {
         this.context.drawImage(this.video, 0, 0, 320, 240)
-        return this.DataURL2Blob(this.canvas.toDataURL('img/png'), 'png')
+        return this.DataURL2Blob(this.canvas.toDataURL('img/jpg'), 'jpg')
       }
     },
     DataURL2Blob (dataURL, type) {

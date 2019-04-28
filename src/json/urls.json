@@ -1,4 +1,5 @@
 {
-  "fileserver":"http://39.108.61.189:8081",
-  "dochubapi":"http://localhost:8080"
+  "fileserver": "http://fileserver.the15373.com:8050",
+  "dochubapi": "https://www.the15373.com:8080",
+  "faceserver": "https://www.the15373.com:8083"
 }

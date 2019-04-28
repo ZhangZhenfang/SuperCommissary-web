@@ -25,7 +25,7 @@
     <div id="userface-div" v-for="face in this.faces" v-bind:key="face.id">
       <el-card :body-style='{ padding: "10px", height: "360px"}' width="100px">
         <div id="facdimg-div">
-          <img :src="'http://localhost:8082/' + face.url" class="image">
+          <img :src='faceserver + "/" + face.url' class="image">
         </div>
         <div style="padding: 14px;">
           <div class="bottom clearfix">
@@ -45,6 +45,7 @@ export default {
   name: 'FaceImage',
   data () {
     return {
+      faceserver: '',
       account: '',
       videoStream: {},
       videodialogVisible: false,
@@ -60,7 +61,7 @@ export default {
   },
   methods: {
     deleteFace (faceid) {
-      this.axios.delete('http://localhost:8082/face/face/' + faceid).then((response) => {
+      this.axios.delete(this.URLS.faceserver + '/face/face/' + faceid).then((response) => {
         if (response.status === 200) {
           if (response.data.status === 1) {
             for (var i = 0; i < this.faces.length; i++) {
@@ -77,7 +78,9 @@ export default {
     },
     getFacesByUserid (userid) {
       // console.log(userid)
-      this.axios.get('http://localhost:8082/face/listByUserid?userid=' + userid).then((response) => {
+      var faceserver = this.URLS.faceserver
+      console.log(faceserver)
+      this.axios.get(faceserver + '/face/listByUserid?userid=' + userid).then((response) => {
         if (response.status === 200) {
           if (response.data.status === 1) {
             this.faces = response.data.data
@@ -97,7 +100,7 @@ export default {
       var config = {
         onUploadProgress: file.onProgress
       }
-      this.axios.post('http://localhost:8082/face/addFace', filedata, config).then((response) => {
+      this.axios.post(this.URLS.faceserver + '/face/addFace', filedata, config).then((response) => {
         // console.log(response.data.status)
         if (response.data.status === 1) {
           this.faces.push(response.data.data)
@@ -142,11 +145,11 @@ export default {
       this.videoStream = stream
     },
     getFaceUserinfo () {
-      this.axios.post('http://localhost:8082/user/getUserinfo', this.qs.stringify({
+      this.axios.post(this.URLS.faceserver + '/user/getUserinfo', this.qs.stringify({
         userName: this.account
       })).then(response => {
         if (response.data.data === '') {
-          this.axios.post('http://localhost:8082/user/addUser', this.qs.stringify({
+          this.axios.post(this.URLS.faceserver + '/user/addUser', this.qs.stringify({
             userName: this.account
           })).then(response => {
             console.log(response)
@@ -163,6 +166,7 @@ export default {
     }
   },
   mounted () {
+    this.faceserver = this.URLS.faceserver
     this.axios.get(this.URLS.dochubapi + '/users/getUserinfo').then(response => {
       if (response.data.status === '1') {
         this.account = response.data.data.account

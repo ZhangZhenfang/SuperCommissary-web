@@ -51,7 +51,7 @@ export default {
           this.$emit('handleResponse', response)
         } else {
           if (!this.loginCompleted) {
-            setTimeout(this.snapAndUpload, 200)
+            setTimeout(this.snapAndUpload, 100)
           }
         }
       })
@@ -59,7 +59,7 @@ export default {
     takecapture () {
       if (this.streaming) {
         this.context.drawImage(this.video, 0, 0, 320, 240)
-        return this.DataURL2Blob(this.canvas.toDataURL('img/png'), 'png')
+        return this.DataURL2Blob(this.canvas.toDataURL('img/jpg'), 'jpg')
       }
     },
     DataURL2Blob (dataURL, type) {

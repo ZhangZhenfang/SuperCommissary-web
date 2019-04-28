@@ -20,7 +20,7 @@
             <el-form-item>
               <el-button size="large" type="primary" @click="submitForm('loginForm')">登录</el-button>
               <el-button size="large" type="primary" @click="resetForm('loginForm')">重置</el-button>
-              <el-button size="large" type="primary" @click="verifyface('loginForm')">人脸登录</el-button>
+              <el-button :disabled='disableface' size="large" type="primary" @click="verifyface('loginForm')">人脸登录</el-button>
             </el-form-item>
           </el-form>
           <el-dialog title="验证人脸" :visible.sync="videodialogVisible" width="400px" :before-close="handleCloseVideo">
@@ -98,7 +98,8 @@ export default {
       }
     }
     return {
-      videoStream: {},
+      disableface: false,
+      videoStream: null,
       videodialogVisible: false,
       loginForm: {
         account: '',
@@ -178,7 +179,10 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.axios.get(this.URLS.dochubapi + '/users/auth', { params: this.loginForm }).then((response) => {
+          var formData = new FormData()
+          formData.append('account', this.loginForm.account)
+          formData.append('password', this.loginForm.password)
+          this.axios.post(this.URLS.dochubapi + '/users/auth', formData).then((response) => {
             this.handleResponse(response)
           }).catch((error) => {
             console.log(error)
@@ -194,7 +198,12 @@ export default {
       if (response.data.status !== '1' && response.data.status !== '2') {
         this.loginStatus = '用户名或密码错误'
       } else {
-        this.handleCloseVideo()
+        // this.handleCloseVideo()
+        if (this.videoStream !== null) {
+          this.videoStream.getTracks()[0].stop()
+        }
+        this.videoStream = null
+        this.videodialogVisible = false
         this.loginStatus = ''
         /** 修改父组件的值 */
         this.$emit('updateUsername', response.data.name)
@@ -207,7 +216,7 @@ export default {
     },
     verifyface (formName) {
       console.log(this.loginForm)
-      if (this.loginForm.account != '') {
+      if (this.loginForm.account !== '') {
         this.videodialogVisible = true
         navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
           this.videoStream = stream
@@ -217,7 +226,8 @@ export default {
       }
     },
     handleCloseVideo (done) {
-      if (this.videoStream != null) {
+      console.log(this.videoStream)
+      if (this.videoStream !== null) {
         this.videoStream.getTracks()[0].stop()
       }
       this.videoStream = null
