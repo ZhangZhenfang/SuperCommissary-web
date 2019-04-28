@@ -1,5 +1,5 @@
 {
-  "fileserver": "https://fileserver.the15373.com:8050",
+  "fileserver": "https://fileserver.the15373.com:8051",
   "dochubapi": "https://www.the15373.com:8080",
   "faceserver": "https://www.the15373.com:8083"
 }
