@@ -59,7 +59,7 @@ export default {
       } else if (index === 3) {
         this.currentTabComponent = Updatepassword
       } else if (index === 4) {
-        this.currentTabComponent = FaceImage
+        // this.currentTabComponent = FaceImage
       } else if (index === 5) {
         this.axios.get(this.URLS.dochubapi + '/users/logout').then((response) => {
           if (response.data.status === '1') {
