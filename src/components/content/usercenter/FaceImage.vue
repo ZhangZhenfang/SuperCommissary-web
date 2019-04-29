@@ -2,7 +2,7 @@
   <div id="facdimage-div">
     <div id="addface-div">
       <div id="newface-div">
-        <el-button type="primary" size="small" icon="el-icon-plus" @click="outdialogVisible = true">添加人脸图像</el-button>
+        <el-button type="primary" disabled size="small" icon="el-icon-plus" @click="outdialogVisible = true">添加人脸图像</el-button>
         <el-button type="primary" size="small" icon="el-icon-plus" @click="handleOpenVideo">视频添加人脸</el-button>
         <el-dialog title="添加人脸" :visible.sync="outdialogVisible" width="30%" :before-close="handleClose">
           <el-upload action="" list-type="picture-card" multiple
