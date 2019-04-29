@@ -98,7 +98,7 @@ export default {
       }
     }
     return {
-      disableface: true,
+      disableface: false,
       videoStream: null,
       videodialogVisible: false,
       loginForm: {
