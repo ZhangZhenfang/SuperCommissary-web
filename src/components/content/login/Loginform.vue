@@ -20,7 +20,7 @@
             <el-form-item>
               <el-button size="large" type="primary" @click="submitForm('loginForm')">登录</el-button>
               <el-button size="large" type="primary" @click="resetForm('loginForm')">重置</el-button>
-              <el-button :disabled='disableface' size="large" type="primary" @click="verifyface('loginForm')">人脸登录</el-button>
+              <el-button :disabled='disableface' size="large" type="primary" @click="verifyface('loginForm')">刷脸登录</el-button>
             </el-form-item>
           </el-form>
           <el-dialog title="验证人脸" :visible.sync="videodialogVisible" width="400px" :before-close="handleCloseVideo">
